@@ -7,10 +7,9 @@
 # Activates a virtual environment.
 activate_venv()
 {
-	export PYTHONPATH=$ESDOC_DIR_BASH:$PYTHONPATH
-	venv_path=$ESDOC_SHELL_VENV
-	source $venv_path/bin/activate
-	log "venv activated @ "$venv_path
+	export PYTHONPATH=$CMIP6_HOME:$PYTHONPATH
+	source $CMIP6_LIB_VENV/bin/activate
+	log "venv activated @ "$CMIP6_LIB_VENV
 }
 
 # Wraps standard echo by adding ESDOC prefix.
@@ -50,6 +49,7 @@ on_cmd_begin()
 on_cmd_end()
 {
 	log_banner
+	deactivate
 	log $1" :: ENDS"
 	log_banner
 }

@@ -1,22 +1,16 @@
 #!/bin/bash
 
-# Import utils.
-source $CMIP6_BASH/utils.sh
-
 # Main entry point.
 main()
 {
-	on_cmd_begin 'verify-repos'
-
+	echo "ff-"$1
 	if [ "$1" ]; then
 		institution=$1
 	else
 		institution=all
 	fi
 
-	python $CMIP6_LIB/institutes/verify_repos.py --institution-id=$institution
-
-	on_cmd_end 'verify-repos'
+	python $CMIP6_LIB/institutes/verify_repos.py --institution-id=$1
 }
 
 # Invoke entry point.
