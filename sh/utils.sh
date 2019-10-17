@@ -1,6 +1,16 @@
 #!/bin/bash
 
 # ###############################################################
+# SECTION: INITIALIZE PATHS / VARS
+# ###############################################################
+
+# Vocabs.
+source $ESDOC_HOME/bash/utils_vars.sh
+
+# Vocabs.
+source $CMIP6_BASH/utils_vocabs.sh
+
+# ###############################################################
 # SECTION: HELPER FUNCTIONS
 # ###############################################################
 
@@ -54,13 +64,4 @@ on_cmd_end()
 	log_banner
 }
 
-# ###############################################################
-# SECTION: INITIALIZE PATHS / VARS
-# ###############################################################
-
-# Vocabs.
-source $CMIP6_BASH/utils_vocabs.sh
-
-# Project specific.
-declare ESDOC_DIR_CMIP6=$ESDOC_DIR_REPOS_CMIP6
 
