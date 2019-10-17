@@ -1,7 +1,19 @@
+# --------------------------------------------------------------------
+# PATHS
+# --------------------------------------------------------------------
+
 # Set paths
 export CMIP6_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export CMIP6_BASH=$CMIP6_HOME/sh
 export CMIP6_LIB=$CMIP6_HOME/cmip6
+
+# Ensure target scripts are executable.
+chmod a+x $CMIP6_BASH/*.sh
+chmod a+x $CMIP6_BASH/*/*.sh
+
+# --------------------------------------------------------------------
+# COMMAND EXECUTION
+# --------------------------------------------------------------------
 
 # Command executor.
 exec_cmd()
@@ -29,14 +41,19 @@ exec_cmd()
 	log_banner
 }
 
+# --------------------------------------------------------------------
+# ALIASES
+# --------------------------------------------------------------------
+
 # ... citations
-alias cmip6-citations-init-xls=$CMIP6_BASH/citations/init_xls.sh
+alias cmip6-citations-init-xls='exec_cmd citations-init-xls $CMIP6_BASH/citations/init_xls.sh $1'
 alias cmip6-citations-generate-json='exec_cmd citations-generate-json $CMIP6_BASH/citations/generate_json.sh $1'
 
 # ... institutes
 alias cmip6-institutes-list='exec_cmd institutes-list $CMIP6_BASH/institutes/list.sh'
 alias cmip6-institutes-verify-repos='exec_cmd institutes-verify-repos $CMIP6_BASH/institutes/verify_repos.sh $1'
 
-# Ensure target scripts are executable.
-chmod a+x $CMIP6_BASH/*.sh
-chmod a+x $CMIP6_BASH/*/*.sh
+# ... parties
+alias cmip6-parties-init-xls='exec_cmd parties-init-xls $CMIP6_BASH/parties/init_xls.sh $1'
+alias cmip6-parties-generate-json='exec_cmd parties-generate-json $CMIP6_BASH/parties/generate_json.sh $1'
+

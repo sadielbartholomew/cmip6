@@ -3,7 +3,6 @@
 # Main entry point.
 main()
 {
-	echo "ff-"$1
 	if [ "$1" ]; then
 		institution=$1
 	else
