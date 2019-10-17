@@ -25,14 +25,15 @@ exec_cmd()
 	activate_venv
 	log_banner
 
+	target=$CMIP6_BASH/$2
 	if [ "$3" ] && [ "$4" ] && [ "$5" ]; then
-		source $2 $3 $4 $5
+		source $target $3 $4 $5
 	elif [ "$3" ] && [ "$4" ]; then
-		source $2 $3 $4 ""
+		source $target $3 $4 ""
 	elif [ "$3" ]; then
-		source $2 $3 "" ""
+		source $target $3 "" ""
 	else
-		source $2 ""
+		source $target ""
 	fi
 
 	log_banner
@@ -46,14 +47,19 @@ exec_cmd()
 # --------------------------------------------------------------------
 
 # ... citations
-alias cmip6-citations-init-xls='exec_cmd citations-init-xls $CMIP6_BASH/citations/init_xls.sh $1'
-alias cmip6-citations-generate-json='exec_cmd citations-generate-json $CMIP6_BASH/citations/generate_json.sh $1'
+alias cmip6-citations-init-xls='exec_cmd citations-init-xls citations/init_xls.sh $1'
+alias cmip6-citations-generate-json='exec_cmd citations-generate-json citations/generate_json.sh $1'
+
+# ... experiments
+alias cmip6-experiments-archive-cim-documents='exec_cmd experiments-archive-cim-documents experiments/archive_cim_documents.sh'
+alias cmip6-experiments-write-cim-documents='exec_cmd experiments-write-cim-documents experiments/write_cim_documents.sh'
+alias cmip6-experiments-write-config='exec_cmd experiments-write-config experiments/write_config.sh'
+alias cmip6-experiments-write-d3='exec_cmd experiments-write-d3 experiments/write_d3.sh'
 
 # ... institutes
-alias cmip6-institutes-list='exec_cmd institutes-list $CMIP6_BASH/institutes/list.sh'
-alias cmip6-institutes-verify-repos='exec_cmd institutes-verify-repos $CMIP6_BASH/institutes/verify_repos.sh $1'
+alias cmip6-institutes-list='exec_cmd institutes-list institutes/list.sh'
+alias cmip6-institutes-verify-repos='exec_cmd institutes-verify-repos institutes/verify_repos.sh $1'
 
 # ... parties
-alias cmip6-parties-init-xls='exec_cmd parties-init-xls $CMIP6_BASH/parties/init_xls.sh $1'
-alias cmip6-parties-generate-json='exec_cmd parties-generate-json $CMIP6_BASH/parties/generate_json.sh $1'
-
+alias cmip6-parties-init-xls='exec_cmd parties-init-xls parties/init_xls.sh $1'
+alias cmip6-parties-generate-json='exec_cmd parties-generate-json parties/generate_json.sh $1'
