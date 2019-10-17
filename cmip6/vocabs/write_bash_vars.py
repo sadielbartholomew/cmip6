@@ -19,6 +19,15 @@ import pyessv
 
 
 
+# Define command line argument parser.
+_ARGS = argparse.ArgumentParser("Generates CMIP6 vocab related bash variables.")
+_ARGS.add_argument(
+    "--output-fpath",
+    help="Path to which output will be written",
+    dest="output_fpath",
+    type=str
+    )
+
 # Map of CMIP6 collections to data factories / name pre-formatters.
 _VOCABS = {
     'cmip6': {
@@ -33,14 +42,11 @@ _VOCABS = {
 }
 
 # Template input file.
-_TEMPLATE = __file__.replace('.py', '_template.txt')
-
-# Output file.
-_OUTPUT = __file__.replace('.py', '_output.sh')
+_DIR = os.path.dirname(os.path.realpath(__file__))
+_TEMPLATE = os.path.join(_DIR, 'templates/write_bash_vars.txt')
 
 
-
-def _main():
+def _main(args):
     """Main entry point.
 
     """
@@ -62,10 +68,10 @@ def _main():
             content = content.replace('[{}_RAW]'.format(collection.raw_name.upper()), data)
 
     # Write output to file system.
-    with open(_OUTPUT, 'w') as fstream:
+    with open(args.output_fpath, 'w') as fstream:
         fstream.write(content)
 
 
 # Entry point.
 if __name__ == '__main__':
-    _main()
+    _main(_ARGS.parse_args())

@@ -1,20 +1,16 @@
 #!/bin/bash
 
-# Import utils.
-source $CMIP6_BASH/utils.sh
-
 # Main entry point.
 main()
 {
-	on_cmd_begin "other-write-bash-vars"
+	output_fpath=$CMIP6_BASH/vocabs/write_bash_vars_output.txt
 
-	python $CMIP6_LIB/other/write_bash_vars.py
+	python $CMIP6_LIB/vocabs/write_bash_vars.py --output-fpath=$output_fpath
 
-	cp $CMIP6_LIB/other/write_bash_vars_output.txt $CMIP6_BASH/utils_vocabs.sh
+	cp $output_fpath $CMIP6_BASH/utils_vocabs.sh
+	rm $output_fpath
 
 	log "WCRP cmip6 vocabs bash file written to "$CMIP6_BASH/utils_vocabs.sh
-
-	on_cmd_end "other-write-bash-vars"
 }
 
 # Invoke entry point.
