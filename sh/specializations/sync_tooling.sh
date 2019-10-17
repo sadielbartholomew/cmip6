@@ -16,7 +16,7 @@ main()
 		mkdir $ESDOC_DIR_CMIP6/cmip6-specializations-$specialization/validate
 		cp -r $ESDOC_DIR_CMIP6/cmip6-specializations-toplevel/validate/* $ESDOC_DIR_CMIP6/cmip6-specializations-$specialization/validate
 
-		log "CMIP6-SPECS : ... synced: "$specialization
+		log "... synced: "$specialization
 	done
 
 	# Sync to pyesdoc.
@@ -27,7 +27,7 @@ main()
 	cp $ESDOC_DIR_CMIP6/cmip6-specializations-toplevel/generate/utils_loader.py $ESDOC_DIR_REPOS_CORE/esdoc-py-client/pyesdoc/mp/specializations
 	cp $ESDOC_DIR_CMIP6/cmip6-specializations-toplevel/generate/utils_model.py $ESDOC_DIR_REPOS_CORE/esdoc-py-client/pyesdoc/mp/specializations
 	cp $ESDOC_DIR_CMIP6/cmip6-specializations-toplevel/generate/utils_parser.py $ESDOC_DIR_REPOS_CORE/esdoc-py-client/pyesdoc/mp/specializations
-	log "CMIP6-SPECS : ... synced: pyesdoc"
+	log "... synced: pyesdoc"
 }
 
 # Invoke entry point.

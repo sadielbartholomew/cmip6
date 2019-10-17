@@ -64,5 +64,25 @@ alias cmip6-institutes-verify-repos='exec_cmd institutes-verify-repos institutes
 alias cmip6-parties-init-xls='exec_cmd parties-init-xls parties/init_xls.sh $1'
 alias cmip6-parties-generate-json='exec_cmd parties-generate-json parties/generate_json.sh $1'
 
+# ... specializations
+# alias esdoc-cmip6-specializations-clone=$ESDOC_DIR_BASH/cmip6/specializations/clone.sh
+# alias esdoc-cmip6-specializations-pull=$ESDOC_DIR_BASH/cmip6/specializations/pull.sh
+# alias esdoc-cmip6-specializations-push=$ESDOC_DIR_BASH/cmip6/specializations/push.sh
+# alias esdoc-cmip6-specializations-generate=$ESDOC_DIR_BASH/cmip6/specializations/generate.sh
+# alias esdoc-cmip6-specializations-sync-cim-profile=$ESDOC_DIR_BASH/cmip6/specializations/sync_cim_profile.sh
+# alias esdoc-cmip6-specializations-sync-definitions=$ESDOC_DIR_BASH/cmip6/specializations/sync_definitions.sh
+# alias esdoc-cmip6-specializations-sync-mappings=$ESDOC_DIR_BASH/cmip6/specializations/sync_mappings.sh
+# alias esdoc-cmip6-specializations-sync-templates=$ESDOC_DIR_BASH/cmip6/specializations/sync_templates.sh
+# alias esdoc-cmip6-specializations-sync-tooling=$ESDOC_DIR_BASH/cmip6/specializations/sync_tooling.sh
+# alias esdoc-cmip6-specializations-sync-viewer=$ESDOC_DIR_BASH/cmip6/specializations/sync_viewer.sh
+# alias esdoc-cmip6-specializations-validate=$ESDOC_DIR_BASH/cmip6/specializations/validate.sh
+
+alias cmip6-specializations-clone='exec_cmd specializations-clone specializations/clone.sh'
+alias cmip6-specializations-generate='exec_cmd specializations-generate specializations/generate.sh'
+alias cmip6-specializations-pull='exec_cmd specializations-pull specializations/pull.sh'
+alias cmip6-specializations-push='exec_cmd specializations-push specializations/push.sh'
+
+
+
 # ... vocabs
 alias cmip6-vocabs-write-bash-vars='exec_cmd vocabs-write-bash-vars vocabs/write_bash_vars.sh'
