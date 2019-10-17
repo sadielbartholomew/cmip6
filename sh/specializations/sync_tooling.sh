@@ -1,16 +1,8 @@
 #!/bin/bash
 
-# Import utils.
-source $CMIP6_BASH/utils.sh
-
-# Import vocab.
-source $CMIP6_BASH/specializations/vocab.sh
-
 # Main entry point.
 main()
 {
-	on_cmd_begin "specializations-sync-tooling"
-
 	# Sync definitions.
 	for specialization in "${CMIP6_REALM_SPECIALIZATIONS[@]}"
 	do
@@ -36,8 +28,6 @@ main()
 	cp $ESDOC_DIR_CMIP6/cmip6-specializations-toplevel/generate/utils_model.py $ESDOC_DIR_REPOS_CORE/esdoc-py-client/pyesdoc/mp/specializations
 	cp $ESDOC_DIR_CMIP6/cmip6-specializations-toplevel/generate/utils_parser.py $ESDOC_DIR_REPOS_CORE/esdoc-py-client/pyesdoc/mp/specializations
 	log "CMIP6-SPECS : ... synced: pyesdoc"
-
-	on_cmd_end "specializations-sync-tooling"
 }
 
 # Invoke entry point.

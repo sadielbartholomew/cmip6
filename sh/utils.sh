@@ -4,11 +4,14 @@
 # SECTION: INITIALIZE PATHS / VARS
 # ###############################################################
 
-# Vocabs.
+# Vars.
 source $ESDOC_HOME/bash/utils_vars.sh
 
 # Vocabs.
 source $CMIP6_BASH/utils_vocabs.sh
+
+# Specializations.
+source $CMIP6_BASH/utils_specializations.sh
 
 # ###############################################################
 # SECTION: HELPER FUNCTIONS

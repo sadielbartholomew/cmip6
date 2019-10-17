@@ -1,16 +1,8 @@
 #!/bin/bash
 
-# Import utils.
-source $CMIP6_BASH/utils.sh
-
-# Import vocab.
-source $CMIP6_BASH/specializations/vocab.sh
-
 # Main entry point.
 main()
 {
-	on_cmd_begin "specializations-push"
-
 	declare comment=$1
 
 	# Push specializations.
@@ -29,8 +21,6 @@ main()
 	git add .
 	git commit -m $comment
 	git push -v origin master:master
-
-	on_cmd_end "specializations-push"
 }
 
 # Invoke entry point.
