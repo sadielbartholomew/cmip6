@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """
-.. module:: init_citation_xls.py
+.. module:: reset_json.py
    :license: GPL/CeCIL
    :platform: Unix, Windows
-   :synopsis: Initialises CMIP6 model citation spreadsheets.
+   :synopsis: Resets CMIP6 model JSON documents.
 
 .. moduleauthor:: Mark Conway-Greenslade <momipsl@ipsl.jussieu.fr>
 

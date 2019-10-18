@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """
-.. module:: init_citation_xls.py
+.. module:: reset_cim.py
    :license: GPL/CeCIL
    :platform: Unix, Windows
-   :synopsis: Initialises CMIP6 model citation spreadsheets.
+   :synopsis: Resets CMIP6 model CIM documents.
 
 .. moduleauthor:: Mark Conway-Greenslade <momipsl@ipsl.jussieu.fr>
 
@@ -13,8 +13,8 @@ import argparse
 import os
 import shutil
 
-from cmip6.utils import vocabs
 from cmip6.utils import io_mgr
+from cmip6.utils import vocabs
 
 
 

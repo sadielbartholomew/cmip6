@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """
-.. module:: generate_pdf/__main__.py
+.. module:: generate_pdf.py
    :license: GPL/CeCIL
    :platform: Unix, Windows
-   :synopsis: Generates CMIP6 PDF documents.
+   :synopsis: Generates CMIP6 model documentation PDF documents.
 
 .. moduleauthor:: Mark Conway-Greenslade <momipsl@ipsl.jussieu.fr>
 
@@ -19,7 +19,7 @@ from tornado import template
 import pyesdoc
 import pyessv
 
-from _utils import ModelTopicOutput
+from cmip6.models.utils import ModelTopicOutput
 from cmip6.utils import vocabs
 
 

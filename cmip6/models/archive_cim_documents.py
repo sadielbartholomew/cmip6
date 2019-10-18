@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """
-.. module:: generate_cim.py
+.. module:: archive_cim_documents.py
    :license: GPL/CeCIL
    :platform: Unix, Windows
-   :synopsis: Generates CMIP6 CIM documents from simplified JSON output.
+   :synopsis: Moves generated CMIP6 model CIM documets into archive.
 
 .. moduleauthor:: Mark Conway-Greenslade <momipsl@ipsl.jussieu.fr>
 
@@ -16,8 +16,9 @@ import shutil
 
 import pyessv
 
-import _utils as utils
+from cmip6.models import utils
 from cmip6.utils import vocabs
+from cmip6.utils import io_mgr
 
 
 # Define command line argument parser.
@@ -64,7 +65,7 @@ def _get_cim_files(institute, source_id):
     """Returns CIM files to be copied to documentation archive.
 
     """
-    folder = utils.get_folder_of_cmip6_source(institute, source_id, 'cim')
+    folder = io_mgr.get_model_folder(institute, source_id, 'cim')
 
     return [os.path.join(folder, i) for i in os.listdir(folder)]
 

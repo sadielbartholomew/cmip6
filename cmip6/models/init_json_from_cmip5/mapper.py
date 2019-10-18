@@ -14,7 +14,8 @@ import os
 import convertor
 import defaults
 import mappings
-from _utils import ModelTopicOutput
+
+from cmip6.models.utils import ModelTopicOutput
 
 
 class MappingInfo(object):

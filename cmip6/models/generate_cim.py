@@ -17,11 +17,10 @@ import pyesdoc
 
 from pyesdoc.ontologies.cim import v2 as cim
 
+from cmip6.models import utils
 from cmip6.utils import io_mgr
 from cmip6.utils import logger
 from cmip6.utils import vocabs
-import _utils as utils
-
 
 
 # Define command line argument parser.
@@ -146,7 +145,7 @@ def _get_cim_fpath(i, s):
     """Returns file path of CIM document to be written to file system.
 
     """
-    path = utils.get_folder_of_cmip6_source(i, s, 'cim')
+    path = io_mgr.get_model_folder(i, s, 'cim')
     fname = utils.get_file_of_cmip6(i, s, None, 'json')
 
     return os.path.join(path, fname)

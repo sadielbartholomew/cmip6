@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """
-.. module:: generate_cim.py
+.. module:: generate_json.py
    :license: GPL/CeCIL
    :platform: Unix, Windows
-   :synopsis: Generates CMIP6 JSON documents from XLS files.
+   :synopsis: Generates CMIP6 model documentation JSON documents.
 
 .. moduleauthor:: Mark Conway-Greenslade <momipsl@ipsl.jussieu.fr>
 
@@ -17,7 +17,8 @@ import os
 import openpyxl
 import pyessv
 
-import _utils as utils
+from cmip6.models import utils
+from cmip6.utils import io_mgr
 from cmip6.utils import logger
 from cmip6.utils import vocabs
 
@@ -63,7 +64,7 @@ def _get_spreadsheet(i, s, t):
 
     """
     fname = utils.get_file_of_cmip6(i, s, t, 'xlsx')
-    path = utils.get_folder_of_cmip6_source(i, s)
+    path = io_mgr.get_model_folder(i, s)
     path = os.path.join(path, fname)
     if not os.path.exists:
         raise IOError()
@@ -102,9 +103,9 @@ def _write_to_fs(i, s, t, obj):
     """Writes json content to file system.
 
     """
+    folder = io_mgr.get_model_folder(i, s, 'json')
     fname = utils.get_file_of_cmip6(i, s, t, 'json')
-    path = utils.get_folder_of_cmip6_source(i, s, 'json')
-    path = os.path.join(path, fname)
+    path = os.path.join(folder, fname)
 
     # Write only when there is content.
     if len(obj['content']) > 0:
