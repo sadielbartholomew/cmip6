@@ -47,17 +47,24 @@ def _main(args):
     institutes = vocabs.get_institutes(args.institution_id)
     for i in institutes:
         for s in vocabs.get_institute_sources(i):
-            for src in _get_cim_files(i, s):
-                fname = '{}.json'.format(hashlib.md5(src.split("/")[-1]).hexdigest())
-                dest = os.path.join(args.dest, fname)
-                shutil.copy(src, dest)
+            _copy_files(i, s)
 
 
-def _get_cim_files(i, s):
+def _copy_files(institute, source_id):
+    """Copies model files into archive.
+
+    """
+    for src in _get_cim_files(institute, source_id):
+        fname = hashlib.md5(src.split("/")[-1]).hexdigest()
+        dest = os.path.join(args.dest, '{}.json'.format(fname))
+        shutil.copy(src, dest)
+
+
+def _get_cim_files(institute, source_id):
     """Returns CIM files to be copied to documentation archive.
 
     """
-    folder = utils.get_folder_of_cmip6_source(i, s, 'cim')
+    folder = utils.get_folder_of_cmip6_source(institute, source_id, 'cim')
 
     return [os.path.join(folder, i) for i in os.listdir(folder)]
 

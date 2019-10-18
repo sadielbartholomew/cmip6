@@ -14,10 +14,10 @@ import json
 import os
 
 import pyesdoc
-import pyessv
 
 from pyesdoc.ontologies.cim import v2 as cim
 
+from cmip6.utils import io_mgr
 from cmip6.utils import logger
 from cmip6.utils import vocabs
 import _utils as utils
@@ -83,13 +83,15 @@ def _get_publication_settings(i):
     """Returns an institute's model publication settings.
 
     """
-    fpath = os.path.join(utils.get_folder_of_cmip6_institute(i),
-                         _MODEL_PUBLICATION_FNAME)
+    fpath = io_mgr.get_model_settings(i, _MODEL_PUBLICATION_FNAME)
     with open(fpath, 'r') as fstream:
         return json.loads(fstream.read())
 
 
 def _can_publish(i, s, settings):
+    """Returns flag indicating whether a cim files is to be published or not.
+
+    """
     return len([i for i in settings.values() if i['publish'] == 'on']) > 0
 
 
@@ -98,24 +100,11 @@ def _sync_fs(i, s, settings):
     This results in either an updated document or a deleted document.
 
     """
-    # Get file content.
     content = _get_content(i, s, settings)
-
-    # Get file path.
-    path = _get_cim_fpath(i, s)
-
-    # Delete if content is null.
-    if content is None:
-        pass
-        # if os.path.exists(path):
-        #     logger.log('deleting --> {}'.format(path.split('/')[-1]), app='SH')
-        #     os.remove(path)
-
-    # Write otherwise.
-    else:
-        logger.log('writing --> {}'.format(path.split('/')[-1]), app='SH')
-        with open(path, 'w') as fstream:
-            fstream.write(content)
+    fpath = _get_cim_fpath(i, s)
+    logger.log('writing --> {}'.format(fpath.split('/')[-1]), app='SH')
+    with open(fpath, 'w') as fstream:
+        fstream.write(content)
 
 
 def _get_content(i, s, settings):
@@ -146,7 +135,7 @@ def _get_data_accessors(i, s, settings):
     """Returns a collection of model spreadsheet output accessors - one per spreadsheet.
 
     """
-    topics = pyessv.ESDOC.cmip6.get_model_topics(s)
+    topics = vocabs.get_model_topics(s)
     topics = [t for t in topics if t.canonical_name in settings]
     accessors = [utils.ModelTopicOutput.create(_MIP_ERA, i, s, t) for t in topics]
 

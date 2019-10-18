@@ -17,6 +17,7 @@ import os
 
 import pyessv
 from cmip6.utils import vocabs
+from cmip6.utils import io_mgr
 
 
 
@@ -36,7 +37,7 @@ class ModelSettings(object):
         """Ctor.
 
         """
-        self.directory = None
+        self.directory = io_mgr.get_models_folder(self.institution)
         self.fname = fname
         self.institution = institution
         self.new = collections.OrderedDict()
@@ -44,50 +45,15 @@ class ModelSettings(object):
 
 
     def execute(self):
-        self._set_directory()
-        self._set_previous_settings()
-        self._set_new_settings()
+        """Executes settings initialisor.
+
+        """
+        self._set_previous()
+        self._set_new()
         self._write()
 
 
-    def _get_topics(self, source):
-        """Returns set of topics to be processed.
-
-        """
-        return [pyessv.ESDOC.cmip6.model_topic.toplevel] + \
-                pyessv.WCRP.cmip6.get_source_realms(source)
-
-
-    def _set_directory(self):
-        """Assigns directory path.
-
-        """
-        fpath = os.getenv('ESDOC_HOME')
-        fpath = os.path.join(fpath, 'repos')
-        fpath = os.path.join(fpath, 'institutional')
-        fpath = os.path.join(fpath, self.institution.canonical_name)
-        if not os.path.isdir(fpath):
-            raise ValueError('{} GitHub repo does not exist.'.format(self.institution.canonical_name))
-        fpath = os.path.join(fpath, 'cmip6')
-        fpath = os.path.join(fpath, 'models')
-        if not os.path.isdir(fpath):
-            os.makedirs(fpath)
-
-        self.directory = fpath
-
-
-    def _set_new_settings(self):
-        """Assigns new settings.
-
-        """
-        for source in vocabs.get_institute_sources(self.institution):
-            settings = collections.OrderedDict()
-            for realm in self._get_topics(source):
-                settings[realm.canonical_name] = self._get_new_setting(source, realm)
-            self.new[source.canonical_name] = settings
-
-
-    def _set_previous_settings(self):
+    def _set_previous(self):
         """Assigns previous settings.
 
         """
@@ -95,6 +61,17 @@ class ModelSettings(object):
         if os.path.exists(fpath):
             with open(fpath, 'r') as fstream:
                 self.previous = json.loads(fstream.read())
+
+
+    def _set_new(self):
+        """Assigns new settings.
+
+        """
+        for source in vocabs.get_institute_sources(self.institution):
+            settings = collections.OrderedDict()
+            for topic in vocabs.get_source_topics(source):
+                settings[topic.canonical_name] = self._get_new_setting(source, topic)
+            self.new[source.canonical_name] = settings
 
 
     def _write(self):
@@ -168,9 +145,8 @@ def _main(args):
 
     """
     institutes = vocabs.get_institutes(args.institution_id)
-    for i in institutes:
-        writers = [w(i) for w in _WRITERS]
-        for writer in writers:
+    for institute in institutes:
+        for writer in [i(institute) for i in _WRITERS]:
             writer.execute()
 
 

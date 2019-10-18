@@ -13,10 +13,8 @@ import argparse
 import os
 import shutil
 
-import pyessv
-
-import _utils as utils
 from cmip6.utils import vocabs
+from cmip6.utils import io_mgr
 
 
 
@@ -30,14 +28,14 @@ _ARGS.add_argument(
     default="all"
     )
 
+
 def _main(args):
     """Main entry point.
 
     """
-    institutes = vocabs.get_institutes(args.institution_id)
-    for i in institutes:
-        for s in vocabs.get_institute_sources(i):
-            folder = utils.get_folder_of_cmip6_source(i, s, 'cim')
+    for institution in vocabs.get_institutes(args.institution_id):
+        for source_id in vocabs.get_institute_sources(institution):
+            folder = io_mgr.get_model_folder(institution, source_id, 'cim')
             shutil.rmtree(folder)
             os.makedirs(folder)
 

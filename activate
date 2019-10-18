@@ -60,6 +60,19 @@ alias cmip6-experiments-write-d3='exec_cmd experiments-write-d3 experiments/writ
 alias cmip6-institutes-list='exec_cmd institutes-list institutes/list.sh'
 alias cmip6-institutes-verify-repos='exec_cmd institutes-verify-repos institutes/verify_repos.sh $1'
 
+# ... models
+alias cmip6-models-archive-cim-documents='exec_cmd models-archive-cim-documents models/archive_cim_documents.sh'
+alias cmip6-models-generate-cim='exec_cmd models-generate-cim models/generate_cim.sh'
+alias cmip6-models-generate-json='exec_cmd models-generate-json models/generate_json.sh'
+alias cmip6-models-generate-pdf='exec_cmd models-generate-pdf models/generate_pdf.sh'
+alias cmip6-models-generate-xls='exec_cmd models-generate-xls models/generate_xls.sh'
+alias cmip6-models-init-cmip5-docs='exec_cmd models-init-cmip5-docs models/init_cmip5_docs.sh'
+alias cmip6-models-init-json-from-cmip5='exec_cmd models-json-from-cmip5 models/init_json_from_cmip5.sh'
+alias cmip6-models-init-settings='exec_cmd models-init-settings models/init_settings.sh'
+alias cmip6-models-init-coupling-xls='exec_cmd models-init-coupling-xls models/init_coupling_xls.sh'
+alias cmip6-models-reset-cim='exec_cmd models-reset-cim models/reset_cim.sh'
+alias cmip6-models-reset-json='exec_cmd models-reset-json models/reset_json.sh'
+
 # ... parties
 alias cmip6-parties-init-xls='exec_cmd parties-init-xls parties/init_xls.sh $1'
 alias cmip6-parties-generate-json='exec_cmd parties-generate-json parties/generate_json.sh $1'

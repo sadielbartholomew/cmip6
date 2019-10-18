@@ -70,15 +70,31 @@ def get_citations_json(i):
     return os.path.join(path, fname)
 
 
-def get_model_folder(institution, source_id, sub_folder=None):
-    path = [institution, 'cmip6', 'models', source_id]
-    if sub_folder:
-        path += [sub_folder]
+def get_institute_folder(institution):
+    """Returns path to an institute's cmip6 directory.
 
-    return get_folder(path)
+    """
+    return get_folder((institution, 'cmip6'))
+
+
+def get_models_folder(institution):
+    """Returns path to an institute's models directory.
+
+    """
+    return get_folder((institution, 'cmip6', 'models'))
+
+
+def get_model_folder(institution, source_id, sub_folder=None):
+    """Returns path to a directory for a particular model.
+
+    """
+    return get_folder((institution, 'cmip6', 'models', source_id, sub_folder))
 
 
 def get_model_cim(institution, source_id):
+    """Returns path to cim directory for a particular model.
+
+    """
     folder = get_model_folder(institution, source_id, 'cim')
     fname = 'cmip6_{}_{}.json'.format(
         institution.canonical_name,
@@ -88,7 +104,19 @@ def get_model_cim(institution, source_id):
     return os.path.join(folder, fname)
 
 
+def get_model_settings(institution, fname):
+    """Returns path to a model settings file.
+
+    """
+    folder = get_models_folder(institution)
+
+    return os.path.join(folder, fname)
+
+
 def get_model_topic_json(institution, source_id, topic):
+    """Returns path to json directory for a particular model.
+
+    """
     folder = get_model_folder(institution, source_id, 'json')
     fname = 'cmip6_{}_{}_{}.json'.format(
         institution.canonical_name,
@@ -100,6 +128,9 @@ def get_model_topic_json(institution, source_id, topic):
 
 
 def get_model_topic_pdf(institution, source_id, topic):
+    """Returns path to pdf directory for a particular model.
+
+    """
     folder = get_model_folder(institution, source_id, 'pdf')
     fname = 'cmip6_{}_{}_{}.pdf'.format(
         institution.canonical_name,
@@ -111,6 +142,9 @@ def get_model_topic_pdf(institution, source_id, topic):
 
 
 def get_model_topic_xls(institution, source_id, topic):
+    """Returns path to xls directory for a particular model.
+
+    """
     folder = get_model_folder(institution, source_id)
     fname = 'cmip6_{}_{}_{}.xlsx'.format(
         institution.canonical_name,

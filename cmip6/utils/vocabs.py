@@ -17,3 +17,10 @@ def get_institutes(institution_id=None):
     """
     return pyessv.WCRP.cmip6.institution_id if institution_id in (None, '', 'all') else \
            [pyessv.WCRP.cmip6.institution_id[institution_id]]
+
+
+def get_source_topics(source_id):
+    """Returns set of institutes to be processed.
+
+    """
+    return [pyessv.ESDOC.cmip6.model_topic.toplevel] + pyessv.WCRP.cmip6.get_source_realms(source_id)
