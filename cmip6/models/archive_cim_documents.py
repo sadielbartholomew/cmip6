@@ -16,7 +16,6 @@ import shutil
 
 import pyessv
 
-from cmip6.models import utils
 from cmip6.utils import vocabs
 from cmip6.utils import io_mgr
 

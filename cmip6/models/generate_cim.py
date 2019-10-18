@@ -17,7 +17,7 @@ import pyesdoc
 
 from pyesdoc.ontologies.cim import v2 as cim
 
-from cmip6.models import utils
+from cmip6.models.utils import ModelTopicOutput
 from cmip6.utils import io_mgr
 from cmip6.utils import logger
 from cmip6.utils import vocabs
@@ -100,7 +100,7 @@ def _sync_fs(i, s, settings):
 
     """
     content = _get_content(i, s, settings)
-    fpath = _get_cim_fpath(i, s)
+    fpath = io_mgr.get_model_cim(i, s)
     logger.log('writing --> {}'.format(fpath.split('/')[-1]), app='SH')
     with open(fpath, 'w') as fstream:
         fstream.write(content)
@@ -136,19 +136,9 @@ def _get_data_accessors(i, s, settings):
     """
     topics = vocabs.get_model_topics(s)
     topics = [t for t in topics if t.canonical_name in settings]
-    accessors = [utils.ModelTopicOutput.create(_MIP_ERA, i, s, t) for t in topics]
+    accessors = [ModelTopicOutput.create(_MIP_ERA, i, s, t) for t in topics]
 
     return [a for a in accessors if a.content]
-
-
-def _get_cim_fpath(i, s):
-    """Returns file path of CIM document to be written to file system.
-
-    """
-    path = io_mgr.get_model_folder(i, s, 'cim')
-    fname = utils.get_file_of_cmip6(i, s, None, 'json')
-
-    return os.path.join(path, fname)
 
 
 def _destructure_injected(container, doc, accessor):

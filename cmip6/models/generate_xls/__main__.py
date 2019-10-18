@@ -17,6 +17,7 @@ import xlsxwriter
 
 import pyesdoc
 import pyessv
+
 from cmip6.models.utils import ModelTopicOutput
 from cmip6.utils import vocabs
 from write_citations_and_parties import write as write_citations_and_parties

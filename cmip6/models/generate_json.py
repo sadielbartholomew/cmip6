@@ -17,7 +17,6 @@ import os
 import openpyxl
 import pyessv
 
-from cmip6.models import utils
 from cmip6.utils import io_mgr
 from cmip6.utils import logger
 from cmip6.utils import vocabs
@@ -56,20 +55,20 @@ def _main(args):
                     logger.log_warning(warning)
                     continue
 
-                _write_to_fs(i, s, t, _get_content(i, s, t, wb))
+                content = _get_content(i, s, t, wb)
+                if len(content['content']) > 0:
+                    _write_to_fs(i, s, t, content)
 
 
 def _get_spreadsheet(i, s, t):
     """Returns a model topic spreadsheet for processing.
 
     """
-    fname = utils.get_file_of_cmip6(i, s, t, 'xlsx')
-    path = io_mgr.get_model_folder(i, s)
-    path = os.path.join(path, fname)
-    if not os.path.exists:
+    fpath = io_mgr.get_model_topic_xls(i, s, t)
+    if not os.path.exists(fpath):
         raise IOError()
 
-    return openpyxl.load_workbook(path, read_only=True)
+    return openpyxl.load_workbook(fpath, read_only=True)
 
 
 def _get_content(i, s, t, wb):
@@ -99,18 +98,14 @@ def _get_content(i, s, t, wb):
     return obj
 
 
-def _write_to_fs(i, s, t, obj):
+def _write_to_fs(i, s, t, content):
     """Writes json content to file system.
 
     """
-    folder = io_mgr.get_model_folder(i, s, 'json')
-    fname = utils.get_file_of_cmip6(i, s, t, 'json')
-    path = os.path.join(folder, fname)
 
-    # Write only when there is content.
-    if len(obj['content']) > 0:
-        with open(path, 'w') as fstream:
-            fstream.write(json.dumps(obj, indent=4))
+    fpath = io_mgr.get_model_topic_json(i, s, t)
+    with open(fpath, 'w') as fstream:
+        fstream.write(json.dumps(content, indent=4))
 
 
 def _set_xls_content(obj, ws):

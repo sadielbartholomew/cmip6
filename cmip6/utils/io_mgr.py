@@ -92,7 +92,7 @@ def get_model_folder(institution, source_id, sub_folder=None):
 
 
 def get_model_cim(institution, source_id):
-    """Returns path to cim directory for a particular model.
+    """Returns path to cim file for a particular model.
 
     """
     folder = get_model_folder(institution, source_id, 'cim')
@@ -114,7 +114,7 @@ def get_model_settings(institution, fname):
 
 
 def get_model_topic_json(institution, source_id, topic):
-    """Returns path to json directory for a particular model.
+    """Returns path to json file for a particular model topic.
 
     """
     folder = get_model_folder(institution, source_id, 'json')
@@ -128,7 +128,7 @@ def get_model_topic_json(institution, source_id, topic):
 
 
 def get_model_topic_pdf(institution, source_id, topic):
-    """Returns path to pdf directory for a particular model.
+    """Returns path to pdf file for a particular model topic.
 
     """
     folder = get_model_folder(institution, source_id, 'pdf')
@@ -142,7 +142,7 @@ def get_model_topic_pdf(institution, source_id, topic):
 
 
 def get_model_topic_xls(institution, source_id, topic):
-    """Returns path to xls directory for a particular model.
+    """Returns path to xls file for a particular model topic.
 
     """
     folder = get_model_folder(institution, source_id)

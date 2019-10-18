@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-.. module:: model_topic.py
+.. module:: utils.py
    :license: GPL/CeCIL
    :platform: Unix, Windows
    :synopsis: Model topic notebook data wrapper.
@@ -179,53 +179,3 @@ class ModelTopicOutput(object):
 
         return values[0] if values else None
 
-
-def get_folder(parts):
-    """Returns path to an institute's mip-era repository.
-
-    """
-    path = os.path.join(os.getenv('ESDOC_HOME'), 'repos')
-    path = os.path.join(path, 'institutional')
-    for part in parts:
-        if part is None:
-            continue
-        try:
-            part.canonical_name
-        except AttributeError:
-            path = os.path.join(path, part)
-        else:
-            path = os.path.join(path, part.canonical_name)
-    if not os.path.isdir(path):
-        os.makedirs(path)
-
-    return path
-
-
-def get_folder_of_cmip6_institute(i):
-    """Returns path to an institute's repository for a particular model/source.
-
-    """
-    return get_folder((i, 'cmip6', 'models'))
-
-
-def get_folder_of_cmip6_source(i, s, subfolder=None):
-    """Returns path to an institute's repository for a particular model/source.
-
-    """
-    return get_folder((i, 'cmip6', 'models', s, subfolder))
-
-
-def get_file(m, i, s, t, encoding):
-    """Returns a file name.
-
-    """
-    if t is not None:
-        return '{}_{}_{}_{}.{}'.format(m, i.canonical_name, s.canonical_name, t.canonical_name, encoding)
-    return '{}_{}_{}.{}'.format(m, i.canonical_name, s.canonical_name, encoding)
-
-
-def get_file_of_cmip6(i, s, t, encoding):
-    """Returns a cmip6 file name.
-
-    """
-    return get_file('cmip6', i, s, t, encoding)
