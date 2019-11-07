@@ -15,6 +15,9 @@ import os
 
 import pyessv
 
+from cmip6.utils import logger
+
+
 
 # Home directory.
 ESDOC_HOME = os.getenv('ESDOC_HOME')
@@ -182,6 +185,25 @@ def get_parties_json(i):
     path = os.path.join(path, 'json')
 
     return os.path.join(path, fname)
+
+
+def load_model_settings(i, fname):
+    """Returns model settings content.
+
+    """
+    fpath = get_model_settings(i, fname)
+    with open(fpath, 'r') as fstream:
+        return json.loads(fstream.read())
+
+
+def write_model_cim(i, s, content):
+    """Writes a model topic JSON file to file system.
+
+    """
+    fpath = get_model_cim(i, s)
+    logger.log('writing --> {}'.format(fpath.split('/')[-1]), app='SH')
+    with open(fpath, 'w') as fstream:
+        fstream.write(content)
 
 
 def write_model_topic_json(i, s, t, content):

@@ -48,7 +48,7 @@ def _main(args):
     for i in institutes:
         # Escape if settings file not found.
         try:
-            all_settings = _get_publication_settings(i)
+            all_settings = io_mgr.load_model_settings(i, _MODEL_PUBLICATION_FNAME)
         except IOError:
             warning = '{} model_publications.json not found'
             warning = warning.format(i.canonical_name)
@@ -71,17 +71,9 @@ def _main(args):
             if not settings:
                 continue
 
-            # Sync file system.
-            _sync_fs(i, s, settings)
-
-
-def _get_publication_settings(i):
-    """Returns an institute's model publication settings.
-
-    """
-    fpath = io_mgr.get_model_settings(i, _MODEL_PUBLICATION_FNAME)
-    with open(fpath, 'r') as fstream:
-        return json.loads(fstream.read())
+            # Write CIM file to fs.
+            content = _get_content(i, s, settings)
+            io_mgr.write_model_cim(i, s, content)
 
 
 def _can_publish(i, s, settings):
@@ -89,18 +81,6 @@ def _can_publish(i, s, settings):
 
     """
     return len([i for i in settings.values() if i['publish'] == 'on']) > 0
-
-
-def _sync_fs(i, s, settings):
-    """Syncs an institute's model documentation upon the file system.
-    This results in either an updated document or a deleted document.
-
-    """
-    content = _get_content(i, s, settings)
-    fpath = io_mgr.get_model_cim(i, s)
-    logger.log('writing --> {}'.format(fpath.split('/')[-1]), app='SH')
-    with open(fpath, 'w') as fstream:
-        fstream.write(content)
 
 
 def _get_content(i, s, settings):
