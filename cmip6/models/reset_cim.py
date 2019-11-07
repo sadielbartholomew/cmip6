@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: reset_cim.py
    :license: GPL/CeCIL

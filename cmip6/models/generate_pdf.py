@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: generate_pdf.py
    :license: GPL/CeCIL
@@ -16,10 +14,8 @@ import os
 import latex
 from tornado import template
 
-import pyesdoc
-import pyessv
-
 from cmip6.models.utils import ModelTopicOutput
+from cmip6.utils import io_mgr
 from cmip6.utils import vocabs
 
 
@@ -44,19 +40,19 @@ def _main(args):
     """Main entry point.
 
     """
+    # Load latex template.
     template = _TEMPLATES.load("main.tornado")
-    institutes = vocabs.get_institutes(args.institution_id)
-    for i in institutes:
-        for s in vocabs.get_institute_sources(i):
-            for t in pyessv.ESDOC.cmip6.get_model_topics(s):
-                try:
-                    _write(template, i, s, t)
-                except Exception as err:
-                    fname = '{}_{}_{}_{}.pdf'.format(
-                        _MIP_ERA, i.canonical_name, s.canonical_name, t.canonical_name
-                        )
-                    print('ERROR --> {}'.format(fname))
-                    continue
+
+    # Write PDF files.
+    for i, s, t in vocabs.yield_topics(args.institution_id):
+        try:
+            _write(template, i, s, t)
+        except Exception as err:
+            fname = '{}_{}_{}_{}.pdf'.format(
+                _MIP_ERA, i.canonical_name, s.canonical_name, t.canonical_name
+                )
+            print('ERROR --> {}'.format(fname))
+            continue
 
 
 def _write(template, i, s, t):
@@ -82,8 +78,11 @@ def _write(template, i, s, t):
     as_latex = as_latex.replace('&amp;', 'and')
     as_latex = as_latex.replace('&quot;', '"')
 
+    # Generate PDF.
+    as_pdf = latex.build_pdf(as_latex)
+
     # Write pdf.
-    _write_pdf(latex.build_pdf(as_latex), i, s, t)
+    io_mgr.write_model_topic_pdf(i, s, t, as_pdf)
 
 
 def _set_identifiers(t):
@@ -105,27 +104,6 @@ def _set_identifiers(t):
         pc.idx = '{}.{}.{}'.format(idx1, idx2, idx3)
         for idx, p in enumerate(pc.properties):
             p.idx = '{}.{}'.format(pc.idx, idx + 1)
-
-
-def _write_pdf(content, i, s, t):
-    """Write PDF file to file system.
-
-    """
-    fpath = os.path.join(os.getenv('ESDOC_HOME'), 'repos/institutional')
-    fpath = os.path.join(fpath, i.canonical_name)
-    fpath = os.path.join(fpath, _MIP_ERA)
-    fpath = os.path.join(fpath, 'models')
-    fpath = os.path.join(fpath, s.canonical_name)
-    fpath = os.path.join(fpath, 'pdf')
-    if not os.path.isdir(fpath):
-        os.makedirs(fpath)
-
-    fname = '{}_{}_{}_{}.pdf'.format(
-        _MIP_ERA, i.canonical_name, s.canonical_name, t.canonical_name
-        )
-
-    with open(os.path.join(fpath, fname), 'w') as fstream:
-        fstream.write(str(content))
 
 
 def _str(val):

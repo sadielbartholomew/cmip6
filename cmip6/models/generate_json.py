@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: generate_json.py
    :license: GPL/CeCIL
@@ -42,21 +40,18 @@ def _main(args):
     """Main entry point.
 
     """
-    institutes = vocabs.get_institutes(args.institution_id)
-    for i in institutes:
-        for s in vocabs.get_institute_sources(i):
-            for t in vocabs.get_model_topics(s):
-                try:
-                    wb = _get_spreadsheet(i, s, t)
-                except IOError:
-                    warning = '{} :: {} :: {} :: spreadsheet not found'
-                    warning = warning.format(i.canonical_name, s.canonical_name, t.canonical_name)
-                    logger.log_warning(warning)
-                    continue
+    for i, s, t in vocabs.yield_topics(args.institution_id):
+        try:
+            wb = _get_spreadsheet(i, s, t)
+        except IOError:
+            warning = '{} :: {} :: {} :: spreadsheet not found'
+            warning = warning.format(i.canonical_name, s.canonical_name, t.canonical_name)
+            logger.log_warning(warning)
+            continue
 
-                content = _get_content(i, s, t, wb)
-                if len(content['content']) > 0:
-                    io_mgr.write_model_topic_json(i, s, t, content)
+        content = _get_content(i, s, t, wb)
+        if len(content['content']) > 0:
+            io_mgr.write_model_topic_json(i, s, t, content)
 
 
 def _get_spreadsheet(i, s, t):

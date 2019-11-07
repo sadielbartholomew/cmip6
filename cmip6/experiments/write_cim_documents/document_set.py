@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: document_set.py
    :license: GPL/CeCIL

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: generate_json.py
    :license: GPL/CeCIL

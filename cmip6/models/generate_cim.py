@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: generate_cim.py
    :license: GPL/CeCIL
@@ -10,7 +8,6 @@
 
 """
 import argparse
-import json
 import os
 
 import pyesdoc
@@ -99,9 +96,9 @@ def _get_content(i, s, settings):
     errors = [e for e in errors if
               e.endswith('values --> is an empty list') == False]
     if errors:
-        print "INVALID CIM DOCUMENT:", s
+        print("INVALID CIM DOCUMENT: {}".format(s))
         for err in errors:
-            print err
+            print(err)
 
     # Return JSON string.
     return pyesdoc.encode(doc)

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: model_topic.py
    :license: GPL/CeCIL

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: utils.py
    :license: GPL/CeCIL
@@ -30,28 +28,28 @@ class ModelTopicOutput(object):
     """Model topic documentation output wrapper.
 
     """
-    def __init__(self, mip_era, institute, source_id, topic, path=None):
+    def __init__(self, mip_era, institute, source_id, topic):
         """Instance initialiser.
 
         """
         self.authors = []
         self.citations = []
         self.content = dict()
-        self.fpath = path
-        self.institute = unicode(institute).strip().lower()
+        self.fpath = io_mgr.get_model_topic_json(institute, source_id, topic)
+        self.institute = institute.canonical_name
         self.mip_era = unicode(mip_era).strip().lower()
         self.parties = []
         self.seeding_source = None
-        self.source_id = unicode(source_id).strip().lower()
-        self.specialization = get_topic_specialization(mip_era, topic)
-        self.topic = unicode(topic).strip().lower()
+        self.source_id = source_id.canonical_name
+        self.specialization = get_topic_specialization(mip_era, topic.canonical_name)
+        self.topic = topic.canonical_name
         self._prop = None
         self._prop_specialization = None
 
         # Auto initialise from JSON output file.
         if os.path.isfile(self.fpath):
-            with open(self.fpath, 'r') as fstream:
-                self._from_dict(json.loads(fstream.read()))
+            obj = io_mgr.load_model_topic_json(institute, source_id, topic)
+            self._from_dict(obj)
 
 
     @classmethod
@@ -67,11 +65,7 @@ class ModelTopicOutput(object):
         :rtype: ModelTopicOutput
 
         """
-        # Set path to JSON  file.
-        path = io_mgr.get_model_topic_json(i, s, t)
-
-        # Return instance.
-        return cls('CMIP6', i.canonical_name, s.canonical_name, t.canonical_name, path=path)
+        return cls('CMIP6', i, s, t)
 
 
     def save(self):

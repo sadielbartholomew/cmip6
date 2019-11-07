@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: write_experiments.py
    :license: GPL/CeCIL

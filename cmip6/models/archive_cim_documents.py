@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: archive_cim_documents.py
    :license: GPL/CeCIL
@@ -13,8 +11,6 @@ import argparse
 import hashlib
 import os
 import shutil
-
-import pyessv
 
 from cmip6.utils import vocabs
 from cmip6.utils import io_mgr
@@ -44,10 +40,11 @@ def _main(args):
     """Main entry point.
 
     """
-    institutes = vocabs.get_institutes(args.institution_id)
-    for i in institutes:
-        for s in vocabs.get_institute_sources(i):
-            _copy_files(i, s)
+    if not os.path.exists(args.dest):
+        raise ValueError("Destination folder is invalid")
+
+    for i, s, in vocabs.yield_sources(args.institution_id):
+        _copy_files(i, s)
 
 
 def _copy_files(institute, source_id):
@@ -71,7 +68,4 @@ def _get_cim_files(institute, source_id):
 
 # Main entry point.
 if __name__ == '__main__':
-    args = _ARGS.parse_args()
-    if not os.path.exists(args.dest):
-        raise ValueError("Destination folder is invalid")
-    _main(args)
+    _main(_ARGS.parse_args())

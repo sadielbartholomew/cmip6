@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: write_spreadsheets.py
    :license: GPL/CeCIL

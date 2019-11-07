@@ -1,4 +1,14 @@
+"""
+.. module:: pyessv.utils.logger.py
+   :copyright: Copyright "December 01, 2016", IPSL
+   :license: GPL/CeCIL
+   :platform: Unix, Windows
+   :synopsis: Package logging utility functions.
 
+.. moduleauthor:: Mark Conway-Greenslade <momipsl@ipsl.jussieu.fr>
+
+
+"""
 import pyessv
 
 # Returns set of institutional model configurations.
@@ -10,6 +20,7 @@ get_model_topics = pyessv.ESDOC.cmip6.getmodel_topics
 
 # Returns set of experiments.
 get_experiments = pyessv.WCRP.cmip6.experiment_id
+
 
 def get_institutes(institution_id=None):
     """Returns set of institutes to be processed.
@@ -24,3 +35,21 @@ def get_source_topics(source_id):
 
     """
     return [pyessv.ESDOC.cmip6.model_topic.toplevel] + pyessv.WCRP.cmip6.get_source_realms(source_id)
+
+
+def yield_sources(institution_id):
+    """Yields set of model sources.
+
+    """
+    for i in get_institutes(institution_id):
+        for s in get_institute_sources(i):
+            yield i, s
+
+
+def yield_topics(institution_id):
+    """Yields set of model sourcce topics.
+
+    """
+    for i, s in yield_sources(institution_id):
+        for t in get_model_topics(s):
+            yield i, s, t

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: model_topic.py
    :license: GPL/CeCIL
@@ -187,13 +185,30 @@ def get_parties_json(i):
     return os.path.join(path, fname)
 
 
+def _load_json_content(fpath):
+    """Returns JSON file content.
+
+    """
+    with open(fpath, 'r') as fstream:
+        return json.loads(fstream.read())
+
+
 def load_model_settings(i, fname):
     """Returns model settings content.
 
     """
-    fpath = get_model_settings(i, fname)
-    with open(fpath, 'r') as fstream:
-        return json.loads(fstream.read())
+    path = get_model_settings(i, fname)
+
+    return _load_json_content(path)
+
+
+def load_model_topic_json(i, s, t):
+    """Returns model topic JSON content.
+
+    """
+    path = get_model_topic_json(i, s, t)
+
+    return _load_json_content(path)
 
 
 def write_model_cim(i, s, content):
@@ -213,3 +228,12 @@ def write_model_topic_json(i, s, t, content):
     fpath = get_model_topic_json(i, s, t)
     with open(fpath, 'w') as fstream:
         fstream.write(json.dumps(content, indent=4))
+
+
+def write_model_topic_pdf(i, s, t, content):
+    """Writes a model topic PDF file to file system.
+
+    """
+    fpath = get_model_topic_pdf(i, s, t)
+    with open(fpath, 'w') as fstream:
+        fstream.write(str(content))

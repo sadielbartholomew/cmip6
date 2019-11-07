@@ -1,5 +1,3 @@
-    # -*- coding: utf-8 -*-
-
 """
 .. module:: write_bash_vars.py
    :license: GPL/CeCIL

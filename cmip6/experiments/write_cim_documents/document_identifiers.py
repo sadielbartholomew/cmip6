@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: document_identifiers.py
    :license: GPL/CeCIL

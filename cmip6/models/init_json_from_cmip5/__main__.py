@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: write_model_notebooks.py
    :license: GPL/CeCIL

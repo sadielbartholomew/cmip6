@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: convertors.py
    :license: GPL/CeCIL

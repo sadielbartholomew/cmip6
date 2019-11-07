@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: init_cmip5_docs.py
    :license: GPL/CeCIL

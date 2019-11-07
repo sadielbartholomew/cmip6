@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: generate_xls/__main__.py
    :license: GPL/CeCIL

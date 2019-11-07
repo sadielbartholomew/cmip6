@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: xl_mappins.py
    :license: GPL/CeCIL

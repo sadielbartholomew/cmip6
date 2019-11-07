@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: run_publish_cmip6_documents.py
    :license: GPL/CeCIL
