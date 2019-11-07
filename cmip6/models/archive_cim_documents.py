@@ -43,18 +43,18 @@ def _main(args):
     if not os.path.exists(args.dest):
         raise ValueError("Destination folder is invalid")
 
-    for i, s, in vocabs.yield_sources(args.institution_id):
-        _copy_files(i, s)
+    for institute, source_id in vocabs.yield_sources(args.institution_id):
+        _copy_files(args.dest, institute, source_id)
 
 
-def _copy_files(institute, source_id):
+def _copy_files(dest, institute, source_id):
     """Copies model files into archive.
 
     """
     for src in _get_cim_files(institute, source_id):
         fname = hashlib.md5(src.split("/")[-1]).hexdigest()
-        dest = os.path.join(args.dest, '{}.json'.format(fname))
-        shutil.copy(src, dest)
+        fpath = os.path.join(dest, '{}.json'.format(fname))
+        shutil.copy(src, fpath)
 
 
 def _get_cim_files(institute, source_id):

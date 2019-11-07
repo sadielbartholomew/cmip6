@@ -13,7 +13,9 @@ import pyessv
 
 # Returns set of institutional model configurations.
 get_institute_sources = pyessv.WCRP.cmip6.get_institute_sources
-get_model_configurations = pyessv.WCRP.cmip6.get_institute_sources
+
+# Synonmy for above.
+get_model_configurations = get_institute_sources
 
 # Returns set of topics associated with a model.
 get_model_topics = pyessv.ESDOC.cmip6.getmodel_topics
@@ -38,7 +40,7 @@ def get_source_topics(source_id):
 
 
 def yield_sources(institution_id):
-    """Yields set of model sources.
+    """Yields set of model sources (optionally filtered by institution).
 
     """
     for i in get_institutes(institution_id):
@@ -47,7 +49,7 @@ def yield_sources(institution_id):
 
 
 def yield_topics(institution_id):
-    """Yields set of model sourcce topics.
+    """Yields set of model source topics (optionally filtered by institution).
 
     """
     for i, s in yield_sources(institution_id):
