@@ -32,9 +32,6 @@ _ARGS.add_argument(
     type=str
     )
 
-# MIP era.
-_MIP_ERA = "cmip6"
-
 # Set of properties injected by machinery.
 _INJECTED_PROPERTIES = {'Name', 'Overview', 'Keywords'}
 
@@ -136,7 +133,7 @@ def _get_data_accessors(i, s, settings):
     """
     topics = vocabs.get_model_topics(s)
     topics = [t for t in topics if t.canonical_name in settings]
-    accessors = [ModelTopicOutput.create(_MIP_ERA, i, s, t) for t in topics]
+    accessors = [ModelTopicOutput.create(i, s, t) for t in topics]
 
     return [a for a in accessors if a.content]
 

@@ -63,9 +63,8 @@ def _write(template, i, s, t):
     """Main entry point.
 
     """
-
     # Set documentation wrapper.
-    doc = ModelTopicOutput.create(_MIP_ERA, i, s, t)
+    doc = ModelTopicOutput.create(i, s, t)
 
     # Set identifiers used for indentation purposes.
     _set_identifiers(doc.specialization)

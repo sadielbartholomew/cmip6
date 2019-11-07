@@ -10,6 +10,7 @@
 
 
 """
+import json
 import os
 
 import pyessv
@@ -181,3 +182,12 @@ def get_parties_json(i):
     path = os.path.join(path, 'json')
 
     return os.path.join(path, fname)
+
+
+def write_model_topic_json(i, s, t, content):
+    """Writes a model topic JSON file to file system.
+
+    """
+    fpath = get_model_topic_json(i, s, t)
+    with open(fpath, 'w') as fstream:
+        fstream.write(json.dumps(content, indent=4))

@@ -11,7 +11,6 @@
 """
 import argparse
 import collections
-import json
 import os
 
 import openpyxl
@@ -46,18 +45,18 @@ def _main(args):
     institutes = vocabs.get_institutes(args.institution_id)
     for i in institutes:
         for s in vocabs.get_institute_sources(i):
-            for t in pyessv.ESDOC.cmip6.get_model_topics(s):
+            for t in vocabs.get_model_topics(s):
                 try:
                     wb = _get_spreadsheet(i, s, t)
                 except IOError:
-                    warning = '{} :: {} :: {} spreadsheet not found'
+                    warning = '{} :: {} :: {} :: spreadsheet not found'
                     warning = warning.format(i.canonical_name, s.canonical_name, t.canonical_name)
                     logger.log_warning(warning)
                     continue
 
                 content = _get_content(i, s, t, wb)
                 if len(content['content']) > 0:
-                    _write_to_fs(i, s, t, content)
+                    io_mgr.write_model_topic_json(i, s, t, content)
 
 
 def _get_spreadsheet(i, s, t):
@@ -96,16 +95,6 @@ def _get_content(i, s, t, wb):
             _set_xls_content(obj, ws)
 
     return obj
-
-
-def _write_to_fs(i, s, t, content):
-    """Writes json content to file system.
-
-    """
-
-    fpath = io_mgr.get_model_topic_json(i, s, t)
-    with open(fpath, 'w') as fstream:
-        fstream.write(json.dumps(content, indent=4))
 
 
 def _set_xls_content(obj, ws):

@@ -17,6 +17,9 @@ import os
 from pyesdoc.mp.specializations.utils_cache import get_topic_specialization
 from pyesdoc.mp.specializations.utils_cache import get_property_specialization
 
+from cmip6.utils import vocabs
+from cmip6.utils import io_mgr
+
 
 
 # Null property value.
@@ -52,7 +55,7 @@ class ModelTopicOutput(object):
 
 
     @classmethod
-    def create(cls, m, i, s, t):
+    def create(cls, i, s, t):
         """Get notebook output wrapper instance.
 
         :param str m: MIP era, e.g. cmip6.
@@ -65,12 +68,10 @@ class ModelTopicOutput(object):
 
         """
         # Set path to JSON  file.
-        name = get_file(m, i, s, t, 'json')
-        path = get_folder((i, m, 'models', s, 'json'))
-        path = os.path.join(path, name)
+        path = io_mgr.get_model_topic_json(i, s, t)
 
         # Return instance.
-        return cls(m, i.canonical_name, s.canonical_name, t.canonical_name, path=path)
+        return cls('CMIP6', i.canonical_name, s.canonical_name, t.canonical_name, path=path)
 
 
     def save(self):

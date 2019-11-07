@@ -66,7 +66,7 @@ class Spreadsheet(object):
         """Instance constructor.
 
         """
-        self.doc = ModelTopicOutput.create(_MIP_ERA, i, s, t)
+        self.doc = ModelTopicOutput.create(i, s, t)
         self.institution_id = i.canonical_name
         self.t = self.doc.specialization
         self.topic_label = t.label
