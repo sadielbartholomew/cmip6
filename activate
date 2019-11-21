@@ -58,7 +58,6 @@ alias cmip6-experiments-write-d3='exec_cmd experiments-write-d3 experiments/writ
 
 # ... institutes
 alias cmip6-institutes-list='exec_cmd institutes-list institutes/list.sh'
-
 alias cmip6-institutes-github-repos-clone='exec_cmd institutes-github-repos-clone institutes/github_repos_clone.sh'
 alias cmip6-institutes-github-repos-pull='exec_cmd institutes-github-repos-pull institutes/github_repos_pull.sh'
 alias cmip6-institutes-github-repos-push='exec_cmd institutes-github-repos-push institutes/github_repos_push.sh'

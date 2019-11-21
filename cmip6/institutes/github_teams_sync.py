@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: github_teams_sync.py
    :license: GPL/CeCIL
@@ -13,7 +11,7 @@
 import pyessv
 import requests
 
-import _utils as utils
+import _github_utils as utils
 
 
 

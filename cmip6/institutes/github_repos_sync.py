@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 .. module:: github_repos_sync.py
    :license: GPL/CeCIL
@@ -16,7 +14,7 @@ import os
 import pyessv
 import requests
 
-import _utils as utils
+import _github_utils as utils
 
 
 
