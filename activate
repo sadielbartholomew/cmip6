@@ -58,7 +58,13 @@ alias cmip6-experiments-write-d3='exec_cmd experiments-write-d3 experiments/writ
 
 # ... institutes
 alias cmip6-institutes-list='exec_cmd institutes-list institutes/list.sh'
-alias cmip6-institutes-verify-repos='exec_cmd institutes-verify-repos institutes/verify_repos.sh $1'
+
+alias cmip6-institutes-github-repos-clone='exec_cmd institutes-github-repos-clone institutes/github_repos_clone.sh'
+alias cmip6-institutes-github-repos-pull='exec_cmd institutes-github-repos-pull institutes/github_repos_pull.sh'
+alias cmip6-institutes-github-repos-push='exec_cmd institutes-github-repos-push institutes/github_repos_push.sh'
+alias cmip6-institutes-github-repos-sync='exec_cmd institutes-github-repos-sync institutes/github_repos_sync.sh'
+alias cmip6-institutes-github-repos-verify='exec_cmd institutes-github-repos-verify institutes/github_repos_verify.sh $1'
+alias cmip6-institutes-github-teams-sync='exec_cmd institutes-github-teams-sync institutes/github_teams_sync.sh'
 
 # ... models
 alias cmip6-models-archive-cim-documents='exec_cmd models-archive-cim-documents models/archive_cim_documents.sh'
@@ -92,3 +98,36 @@ alias cmip6-specializations-validate='exec_cmd specializations-validate speciali
 
 # ... vocabs
 alias cmip6-vocabs-write-bash-vars='exec_cmd vocabs-write-bash-vars vocabs/write_bash_vars.sh'
+
+# --------------------------------------------------------------------
+# COMPOSITE COMMANDS
+# --------------------------------------------------------------------
+
+_reset_experiments()
+{
+	cmip6-experiments-write-cim-documents
+	cmip6-experiments-write-config
+	cmip6-experiments-write-d3
+	cmip6-experiments-archive-cim-documents
+}
+alias cmip6-reset-experiments=_reset_experiments
+
+_reset_all()
+{
+	cmip6-experiments-write-cim-documents
+	cmip6-experiments-write-config
+	cmip6-experiments-write-d3
+
+	cmip6-models-generate-cim
+
+	esdoc-archive-delete-documents cmip6
+	cmip6-experiments-archive-cim-documents
+	cmip6-models-archive-cim-documents
+
+	esdoc-ws-db-flush cmip6
+	esdoc-ws-db-ingest
+
+	esdoc-ws-db-backup
+	esdoc-archive-compress
+}
+alias cmip6-reset=_reset_all

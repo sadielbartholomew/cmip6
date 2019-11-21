@@ -75,7 +75,7 @@ declare -a INSTITUTION_ID=(
 	'cnrm-cerfacs'
 	'csir-wits-csiro'
 	'csiro'
-	'csiro-arccss-bom'
+	'csiro-arccss'
 	'dkrz'
 	'dwd'
 	'e3sm-project'
@@ -107,6 +107,7 @@ declare -a INSTITUTION_ID=(
 	'snu'
 	'thu'
 	'ua'
+	'uci'
 	'uhh'
 	'uoft'
 	'utas'
@@ -127,7 +128,7 @@ declare -a INSTITUTION_ID_RAW=(
 	'CNRM-CERFACS'
 	'CSIR-Wits-CSIRO'
 	'CSIRO'
-	'CSIRO-ARCCSS-BoM'
+	'CSIRO-ARCCSS'
 	'DKRZ'
 	'DWD'
 	'E3SM-Project'
@@ -159,6 +160,7 @@ declare -a INSTITUTION_ID_RAW=(
 	'SNU'
 	'THU'
 	'UA'
+	'UCI'
 	'UHH'
 	'UofT'
 	'UTAS'
@@ -184,6 +186,7 @@ declare -a MIP_ERA_RAW=(
 
 # Source ID - canonical name
 declare -a SOURCE_ID=(
+	'4aop-v1-5'
 	'access-cm2'
 	'access-esm1-5'
 	'arts-2-3'
@@ -202,6 +205,7 @@ declare -a SOURCE_ID=(
 	'canesm5-canoe'
 	'cas-esm1-0'
 	'cesm1-1-cam5-cmip5'
+	'cesm1-waccm-sc'
 	'cesm2'
 	'cesm2-fv2'
 	'cesm2-se'
@@ -312,6 +316,7 @@ declare -a SOURCE_ID=(
 
 # Source ID - raw name
 declare -a SOURCE_ID_RAW=(
+	'4AOP-v1-5'
 	'ACCESS-CM2'
 	'ACCESS-ESM1-5'
 	'ARTS-2-3'
@@ -330,6 +335,7 @@ declare -a SOURCE_ID_RAW=(
 	'CanESM5-CanOE'
 	'CAS-ESM1-0'
 	'CESM1-1-CAM5-CMIP5'
+	'CESM1-WACCM-SC'
 	'CESM2'
 	'CESM2-FV2'
 	'CESM2-SE'

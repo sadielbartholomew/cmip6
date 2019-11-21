@@ -1,16 +1,14 @@
 """
-.. module:: verify_repos.py
+.. module:: github_repos_verify.py
    :license: GPL/CeCIL
    :platform: Unix, Windows
-   :synopsis: Verifies that all CMIP6 instituional repos exist.
+   :synopsis: Verifies that all CMIP6 instituional GitHub repos exist.
 
 .. moduleauthor:: Mark Conway-Greenslade <momipsl@ipsl.jussieu.fr>
 
 """
 import argparse
 import os
-
-import pyessv
 
 from cmip6.utils import io_mgr
 from cmip6.utils import logger

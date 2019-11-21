@@ -29,13 +29,20 @@ _ARGS.add_argument(
     default="all"
     )
 
+# File name: model publication.
+_MODEL_PUBLICATION_FNAME = "model_publication.json"
+
+# File name: model initialization (from_CMIP5).
+_MODEL_INITIALIZATION_FNAME = "initialization_from_CMIP5.json"
+
 
 class ModelSettings(object):
     def __init__(self, institution, fname):
         """Ctor.
 
         """
-        self.directory = io_mgr.get_models_folder(self.institution)
+        print io_mgr.get_models_folder(institution)
+        self.directory = io_mgr.get_models_folder(institution)
         self.fname = fname
         self.institution = institution
         self.new = collections.OrderedDict()
@@ -89,7 +96,7 @@ class InitialisationFromCmip5ModelSettings(ModelSettings):
         """Ctor.
 
         """
-        super(InitialisationFromCmip5ModelSettings, self).__init__(institution, 'initialization_from_CMIP5.json')
+        super(InitialisationFromCmip5ModelSettings, self).__init__(institution, _MODEL_INITIALIZATION_FNAME)
 
 
     def _get_new_setting(self, source, realm):
@@ -115,7 +122,7 @@ class ModelPublicationSettings(ModelSettings):
         """Ctor.
 
         """
-        super(ModelPublicationSettings, self).__init__(institution, 'model_publication.json')
+        super(ModelPublicationSettings, self).__init__(institution, _MODEL_PUBLICATION_FNAME)
 
 
     def _get_new_setting(self, source, realm):
