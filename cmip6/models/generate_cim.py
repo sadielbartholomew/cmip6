@@ -68,8 +68,15 @@ def _main(args):
             if not settings:
                 continue
 
-            # Write CIM file to fs.
+            # Generate content.
             content = _get_content(i, s, settings)
+            if content is None:
+                warning = '{} :: {} CIM file not found'
+                warning = warning.format(i.canonical_name, s.canonical_name)
+                logger.log_warning(warning)
+                continue
+
+            # Write CIM file to fs.
             io_mgr.write_model_cim(i, s, content)
 
 
