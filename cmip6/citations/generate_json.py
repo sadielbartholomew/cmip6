@@ -34,7 +34,11 @@ def _main(args):
 
     """
     for i in vocabs.get_institutes(args.institution_id):
-        _write(i)
+        try:
+            _write(i)
+        except Exception as err:
+            print(i)
+            print(err)
 
 
 def _write(i):
@@ -67,7 +71,7 @@ def _get_content(i, spreadsheet):
     """Returns content to be written to file system.
 
     """
-    # Initialise output.
+        # Initialise output.
     obj = collections.OrderedDict()
     obj['mipEra'] = "cmip6"
     obj['institute'] = i.canonical_name
@@ -95,6 +99,9 @@ def _set_xls_content(obj, worksheet):
 
     """
     for row in worksheet.iter_rows(min_row=3, max_col=5, max_row=worksheet.max_row):
+        if not row:
+            continue
+
         mnemonic, doi, bibtex, url, long_name = [i.value for i in row]
         if mnemonic is None:
             continue

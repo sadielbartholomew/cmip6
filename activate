@@ -37,7 +37,6 @@ exec_cmd()
 	fi
 
 	log_banner
-	deactivate
 	log $1" :: ENDS"
 	log_banner
 }
@@ -61,6 +60,7 @@ alias cmip6-institutes-list='exec_cmd institutes-list institutes/list.sh'
 alias cmip6-institutes-github-repos-clone='exec_cmd institutes-github-repos-clone institutes/github_repos_clone.sh'
 alias cmip6-institutes-github-repos-pull='exec_cmd institutes-github-repos-pull institutes/github_repos_pull.sh'
 alias cmip6-institutes-github-repos-push='exec_cmd institutes-github-repos-push institutes/github_repos_push.sh'
+alias cmip6-institutes-github-repos-status='exec_cmd institutes-github-repos-clone institutes/github_repos_status.sh'
 alias cmip6-institutes-github-repos-sync='exec_cmd institutes-github-repos-sync institutes/github_repos_sync.sh'
 alias cmip6-institutes-github-repos-verify='exec_cmd institutes-github-repos-verify institutes/github_repos_verify.sh $1'
 alias cmip6-institutes-github-teams-sync='exec_cmd institutes-github-teams-sync institutes/github_teams_sync.sh'

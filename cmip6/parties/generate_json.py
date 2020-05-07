@@ -96,6 +96,8 @@ def _set_xls_content(obj, worksheet):
 
     """
     for row in worksheet.iter_rows(min_row=3, max_col=7, max_row=worksheet.max_row):
+        if not row:
+            continue
         if row[0].value is None:
             continue
 

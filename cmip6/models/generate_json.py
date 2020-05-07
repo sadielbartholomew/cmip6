@@ -50,8 +50,8 @@ def _main(args):
             continue
 
         content = _get_content(i, s, t, wb)
-        if len(content['content']) > 0:
-            io_mgr.write_model_topic_json(i, s, t, content)
+
+        io_mgr.write_model_topic_json(i, s, t, content)
 
 
 def _get_spreadsheet(i, s, t):
@@ -88,7 +88,7 @@ def _get_content(i, s, t, wb):
         # Extract specialization entries.
         elif idx > 1:
             _set_xls_content(obj, ws)
-
+    
     return obj
 
 
@@ -99,6 +99,9 @@ def _set_xls_content(obj, ws):
     content = None
     content_is_enum = None
     for row in ws.iter_rows(min_row=1, max_col=4, max_row=ws.max_row):
+        if len(row) == 0:
+            continue
+
         # Separation row - begin new specialization block.
         if row[1].value is None:
             if content is not None:

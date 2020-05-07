@@ -41,7 +41,6 @@ class ModelSettings(object):
         """Ctor.
 
         """
-        print io_mgr.get_models_folder(institution)
         self.directory = io_mgr.get_models_folder(institution)
         self.fname = fname
         self.institution = institution
@@ -139,11 +138,13 @@ class ModelPublicationSettings(ModelSettings):
             "publish": get_publish_state()
         }
 
+
 # Settings writers to be executed.
 _WRITERS = [
     InitialisationFromCmip5ModelSettings,
     ModelPublicationSettings
 ]
+
 
 def _main(args):
     """Main entry point.

@@ -44,7 +44,8 @@ def _main(args):
     # Write one file per institute.
     for i in vocabs.get_institutes(args.institution_id):
         dest = io_mgr.get_citations_spreadsheet(i)
-        shutil.copy(args.xls_template, dest)
+        if not os.path.exists(dest):
+            shutil.copy(args.xls_template, dest)
 
 
 # Main entry point.

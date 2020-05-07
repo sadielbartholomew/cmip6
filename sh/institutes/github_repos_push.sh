@@ -7,7 +7,7 @@ main()
 	do
 		cd $ESDOC_HOME/repos/institutional/$institution_id
 		git add *
-		git commit -m $1
+		git commit -S -a -m $1
 		git push origin master
 	done
 }

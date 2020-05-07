@@ -27,11 +27,11 @@ _ARGS.add_argument(
 
 # Set of expected sub-folders.
 SUB_FOLDERS = (
-    'citations',
-    'citations/json',
-    'models',
-    'responsible_parties',
-    'responsible_parties/json'
+    'cmip6/citations',
+    'cmip6/citations/json',
+    'cmip6/models',
+    'cmip6/responsible_parties',
+    'cmip6/responsible_parties/json'
     )
 
 # Set of expected static files.
@@ -140,8 +140,8 @@ def _verify_models(institute, errs):
 # Set of verifiers to be executed.
 _VERIFIERS = (
     _verify_repo,
-    # _verify_sub_folders,
-    # _verify_static_files,
+    _verify_sub_folders,
+    _verify_static_files,
     _verify_models
     )
 

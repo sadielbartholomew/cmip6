@@ -8,7 +8,7 @@
 source $ESDOC_HOME/bash/utils_vars.sh
 
 # Vocabs.
-source $CMIP6_BASH/utils_vocabs.sh
+source $CMIP6_BASH/vocabs/definitions.sh
 
 # ###############################################################
 # SECTION: HELPER FUNCTIONS
@@ -18,8 +18,8 @@ source $CMIP6_BASH/utils_vocabs.sh
 activate_venv()
 {
 	export PYTHONPATH=$CMIP6_HOME:$PYTHONPATH
-	source $CMIP6_LIB_VENV/bin/activate
-	log "venv activated @ "$CMIP6_LIB_VENV
+	# source $CMIP6_LIB_VENV/bin/activate
+	# log "venv activated @ "$CMIP6_LIB_VENV
 }
 
 # Wraps standard echo by adding ESDOC prefix.

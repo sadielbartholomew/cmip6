@@ -39,6 +39,10 @@ def get_source_topics(source_id):
     return [pyessv.ESDOC.cmip6.model_topic.toplevel] + pyessv.WCRP.cmip6.get_source_realms(source_id)
 
 
+# Shorthand.
+get_model_topics = get_source_topics
+
+
 def yield_sources(institution_id):
     """Yields set of model sources (optionally filtered by institution).
 

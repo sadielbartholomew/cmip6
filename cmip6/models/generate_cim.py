@@ -91,7 +91,11 @@ def _get_content(i, s, settings):
     """Generates a CIM document for a CMIP6 institute | source combination.
 
     """
-    doc = _map_model(i, s, _get_data_accessors(i, s, settings))
+    # Set JSON content accessors.
+    accessors = _get_data_accessors(i, s, settings)
+
+    # Map JSON -> CIM.
+    doc = _map_model(i, s, accessors)
     if doc is None:
         return
 
