@@ -49,8 +49,10 @@ def _main(args):
             logger.log_warning(warning)
             continue
 
+        # Set JSON content.
         content = _get_content(i, s, t, wb)
 
+        # Write JSON file.
         io_mgr.write_model_topic_json(i, s, t, content)
 
 
@@ -86,7 +88,7 @@ def _get_content(i, s, t, wb):
             continue
 
         # Extract specialization entries.
-        elif idx > 1:
+        elif idx == 3:
             _set_xls_content(obj, ws)
     
     return obj
@@ -134,6 +136,11 @@ def _set_xls_content(obj, ws):
             # If value is not in blocklist then emit.
             if value not in ('-', 'Other: -'):
                 content[1].append(value)
+
+    # Apply last specialization block.
+    if content is not None:
+        if content[1]:
+            obj['content'][content[0]] = {'values': content[1]}
 
 
 def _is_note(cell):
