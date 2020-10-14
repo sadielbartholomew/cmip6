@@ -36,7 +36,8 @@ def _main():
         utils.create_repo(institution_id)
 
     for repo in [i for i in repos.values() if i.name in repos_to_delete]:
-        utils.delete_repo(repo)
+        print(repo)
+        # utils.delete_repo(repo)
 
 
 def _get_institutes():

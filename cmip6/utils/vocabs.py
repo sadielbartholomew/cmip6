@@ -11,6 +11,8 @@
 """
 import pyessv
 
+
+
 # Returns set of institutional model configurations.
 get_institute_sources = pyessv.WCRP.cmip6.get_institute_sources
 
@@ -24,6 +26,13 @@ get_model_topics = pyessv.ESDOC.cmip6.getmodel_topics
 get_experiments = pyessv.WCRP.cmip6.experiment_id
 
 
+def get_institute(institution_id):
+    """Returns institute to be processed.
+
+    """
+    return pyessv.WCRP.cmip6.institution_id[institution_id]
+
+
 def get_institutes(institution_id=None):
     """Returns set of institutes to be processed.
 
@@ -32,11 +41,30 @@ def get_institutes(institution_id=None):
            [pyessv.WCRP.cmip6.institution_id[institution_id]]
 
 
+def get_source(institution_id, source_id):
+    """Returns source to be processed.
+
+    """
+    for _, s in yield_sources(institution_id):
+        if s.canonical_name == source_id:
+            return s
+
+
 def get_source_topics(source_id):
     """Returns set of institutes to be processed.
 
     """
     return [pyessv.ESDOC.cmip6.model_topic.toplevel] + pyessv.WCRP.cmip6.get_source_realms(source_id)
+
+
+def get_source_topic(source_id, topic_id):
+    """Returns set of institutes to be processed.
+
+    """
+    for t in get_source_topics(source_id):
+        if t.canonical_name == topic_id:
+            return t
+
 
 
 # Shorthand.

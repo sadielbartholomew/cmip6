@@ -145,7 +145,7 @@ def get_repos(predicate=None):
     entities = []
     _get_entities(endpoint, predicate, entities)
 
-    return {i['name']: GitHubRepo(i) for i in entities}
+    return {i['name']: GitHubRepo(i) for i in entities if not i['name'].startswith(".")}
 
 
 class GitHubRepo(object):

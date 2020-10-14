@@ -9,11 +9,15 @@
 """
 import os
 
+import pyessv
+
 import convertor
 import defaults
 import mappings
 
 from cmip6.models.utils import ModelTopicOutput
+from cmip6.utils import vocabs
+
 
 
 class MappingInfo(object):
@@ -30,35 +34,33 @@ class MappingInfo(object):
         self.cmip6_source_id = cmip6_source_id
         self.cmip6_topic = cmip6_topic
 
+        # Set parsed vocabs.
+        self.cmip6_i = vocabs.get_institute(cmip6_institution_id)
+        self.cmip6_s = vocabs.get_source(cmip6_institution_id, cmip6_source_id)
+        self.cmip6_t = vocabs.get_source_topic(self.cmip6_s, cmip6_topic)
 
-def map(mapping_info):
+
+def map(info):
     """Maps a CMIP5 model component to a CMIP6 simplified output.
 
-    :param MappingInfo mapping_info: Information to be mapped.
+    :param MappingInfo info: Information to be mapped.
 
     :returns: CMIP6 simplified model document output.
     :rtype: dict
 
     """
-    # Deconstruct mapping information.
-    cmip5_model_id = mapping_info.cmip5_model_id
-    cmip5_component = mapping_info.cmip5_component
-    cmip6_institution_id = mapping_info.cmip6_institution_id
-    cmip6_source_id = mapping_info.cmip6_source_id
-    cmip6_topic = mapping_info.cmip6_topic
-
     # Set output document to be seeded.
-    doc = _get_document(cmip6_institution_id, cmip6_source_id, cmip6_topic)
+    doc = _get_document(info)
 
     # Set seeding source.
-    doc.seeding_source = 'cmip5:{}'.format(cmip5_model_id)
+    doc.seeding_source = 'cmip5:{}'.format(info.cmip5_model_id)
 
     # Set injected properties.
-    _set_injected_properties(cmip6_topic, cmip5_component, doc)
+    _set_injected_properties(info.cmip6_topic, info.cmip5_component, doc)
 
     # Set specialized properties.
-    if cmip6_topic != 'toplevel':
-        _set_specialized_properties(cmip5_component, doc)
+    if info.cmip6_topic != 'toplevel':
+        _set_specialized_properties(info.cmip5_component, doc)
 
     # Sort values.
     doc.sort_values()
@@ -66,27 +68,17 @@ def map(mapping_info):
     return doc
 
 
-def _get_document(institution_id, source_id, topic_id):
-    """Returns output document.
+def _get_document(info):
+    """Returns output document deleting JSON content if it already exists.
 
     """
-    # Set path to output file.
-    fpath = os.getenv('ESDOC_HOME')
-    fpath = os.path.join(fpath, 'repos/institutional')
-    fpath = os.path.join(fpath, institution_id)
-    fpath = os.path.join(fpath, 'cmip6/models')
-    fpath = os.path.join(fpath, source_id)
-    fpath = os.path.join(fpath, 'json')
-    if not os.path.isdir(fpath):
-        os.makedirs(fpath)
-    fpath = os.path.join(fpath, 'cmip6_{}_{}_{}.json'.format(institution_id, source_id, topic_id))
+    doc = ModelTopicOutput.create(info.cmip6_i, info.cmip6_s, info.cmip6_t)
+    if os.path.exists(doc.fpath):
+        os.remove(doc.fpath)
+        doc = ModelTopicOutput.create(info.cmip6_i, info.cmip6_s, info.cmip6_t)
 
-    # Remove previous ?.
-    if os.path.exists(fpath):
-        os.remove(fpath)
-
-    # Set output wrapper.
-    return ModelTopicOutput('cmip6', institution_id, source_id, topic_id, path=fpath)
+    
+    return doc
 
 
 def _set_injected_properties(cmip6_topic, c, doc):
@@ -128,7 +120,7 @@ def _set_injected_properties(cmip6_topic, c, doc):
         if c.description and len(c.description.strip()) > 0:
             spec_id = '{}.overview'.format(mapped_identifier)
             doc.set_id(spec_id)
-            doc.set_value(c.description, str)
+            doc.set_value(c.description)
 
         # Sub-topic name (level 1 sub-topics only).
         if mapped_identifier.split('.') == 3:

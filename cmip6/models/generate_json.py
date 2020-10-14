@@ -88,7 +88,7 @@ def _get_content(i, s, t, wb):
             continue
 
         # Extract specialization entries.
-        elif idx == 3:
+        elif idx > 1:
             _set_xls_content(obj, ws)
     
     return obj
