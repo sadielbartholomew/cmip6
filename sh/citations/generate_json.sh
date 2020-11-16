@@ -9,7 +9,7 @@ main()
 		local institution=all
 	fi
 
-	python $CMIP6_LIB/citations/generate_json.py --institution-id=$institution
+	pipenv run python $CMIP6_LIB/citations/generate_json.py --institution-id=$institution
 }
 
 # Invoke entry point.

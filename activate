@@ -4,6 +4,7 @@
 
 # Set paths
 export CMIP6_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export CMIP6_ROOT="$( cd "$( dirname "${CMIP6_HOME[0]}" )" && pwd )"
 export CMIP6_BASH=$CMIP6_HOME/sh
 export CMIP6_LIB=$CMIP6_HOME/cmip6
 
@@ -39,6 +40,8 @@ exec_cmd()
 	log_banner
 	log $1" :: ENDS"
 	log_banner
+
+	popd -1
 }
 
 # --------------------------------------------------------------------
@@ -88,6 +91,7 @@ alias cmip6-specializations-clone='exec_cmd specializations-clone specialization
 alias cmip6-specializations-generate='exec_cmd specializations-generate specializations/generate.sh'
 alias cmip6-specializations-pull='exec_cmd specializations-pull specializations/pull.sh'
 alias cmip6-specializations-push='exec_cmd specializations-push specializations/push.sh'
+alias cmip6-specializations-status='exec_cmd specializations-status specializations/status.sh'
 alias cmip6-specializations-sync-cim-profile='exec_cmd specializations-sync-cim-profile specializations/sync_cim_profile.sh'
 alias cmip6-specializations-sync-definitions='exec_cmd specializations-sync-definitions specializations/sync_definitions.sh'
 alias cmip6-specializations-sync-mappings='exec_cmd specializations-sync-mappings specializations/sync_mappings.sh'

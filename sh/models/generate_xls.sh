@@ -9,7 +9,7 @@ main()
 		institution=all
 	fi
 
-	python $CMIP6_LIB/models/generate_xls --institution-id=$institution
+	pipenv run python $CMIP6_LIB/models/generate_xls --institution-id=$institution
 }
 
 # Invoke entry point.

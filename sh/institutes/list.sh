@@ -3,7 +3,7 @@
 # Main entry point.
 main()
 {
-	python $CMIP6_LIB/institutes/list.py
+	pipenv run python $CMIP6_LIB/institutes/list.py
 }
 
 # Invoke entry point.

@@ -8,14 +8,14 @@ main()
 		log_banner
 		log "generating "$specialization
 		log_banner
-		python $ESDOC_DIR_CMIP6/cmip6-specializations-$specialization/generate
+		pipenv run python $CMIP6_ROOT/cmip6-specializations-$specialization/generate
 	else
 		for specialization in "${CMIP6_SPECIALIZATIONS[@]}"
 		do
 			log_banner
 			log "generating "$specialization
 			log_banner
-			python $ESDOC_DIR_CMIP6/cmip6-specializations-$specialization/generate
+			pipenv run python $CMIP6_ROOT/cmip6-specializations-$specialization/generate
 		done
 	fi
 }

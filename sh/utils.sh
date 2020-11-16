@@ -18,6 +18,7 @@ source $CMIP6_BASH/vocabs/definitions.sh
 activate_venv()
 {
 	export PYTHONPATH=$CMIP6_HOME:$PYTHONPATH
+	pushd $CMIP6_HOME
 	# source $CMIP6_LIB_VENV/bin/activate
 	# log "venv activated @ "$CMIP6_LIB_VENV
 }
@@ -64,4 +65,12 @@ on_cmd_end()
 	log_banner
 }
 
+# Wraps pushd command to suppress stdout.
+function pushd () {
+    command pushd "$@" > /dev/null
+}
 
+# Wraps popd command to suppress stdout.
+function popd () {
+    command popd "$@" > /dev/null
+}

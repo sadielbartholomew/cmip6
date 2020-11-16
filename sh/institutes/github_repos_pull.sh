@@ -6,8 +6,9 @@ main()
 	for institution_id in "${INSTITUTION_ID[@]}"
 	do
 		log "GITHUB : pulling  "$institution_id
-		cd $ESDOC_HOME/repos/institutional/$institution_id
+		pushd $ESDOC_HOME/repos/institutional/$institution_id
 		git pull
+		popd -1
 	done
 }
 
