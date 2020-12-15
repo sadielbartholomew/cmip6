@@ -72,6 +72,23 @@ def get_citations_json(i):
     return os.path.join(path, fname)
 
 
+def get_machines_folder(institution):
+    """Returns path to an institute's machines directory.
+
+    """
+    return get_folder((institution, 'cmip6', 'machines'))
+
+
+def get_machines_spreadsheet(institution):
+    """Returns path to an institute's machines xls file.
+
+    """
+    fname = 'cmip6_{}_machines.xlsx'.format(institution.canonical_name)
+    path = get_machines_folder(institution)
+
+    return os.path.join(path, fname)
+
+
 def get_institute_folder(institution):
     """Returns path to an institute's cmip6 directory.
 
