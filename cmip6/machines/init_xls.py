@@ -14,6 +14,7 @@ import os
 import shutil
 
 from cmip6.utils import io_mgr
+from cmip6.utils import logger
 from cmip6.utils import vocabs
 
 
@@ -45,8 +46,9 @@ def _main(args):
 
     # Write one file per institute.
     for i in vocabs.get_institutes(args.institution_id):
-        dest = io_mgr.get_citations_spreadsheet(i)
+        dest = io_mgr.get_machines_spreadsheet(i)
         if not os.path.exists(dest):
+            logger.log("copying xls file for {}".format(i.raw_name))
             shutil.copy(args.xls_template, dest)
 
 
