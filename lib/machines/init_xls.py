@@ -36,6 +36,18 @@ _ARGS.add_argument(
     )
 
 
+def set_institute_name_in_xls(institution):
+    pass
+
+
+def set_applicable_models_in_xls(institution):
+    pass
+
+
+def set_applicable_experiments_in_xls(institution):
+    pass
+
+
 def _main(args):
     """Main entry point.
 
@@ -44,12 +56,27 @@ def _main(args):
     if not os.path.exists(args.xls_template):
         raise ValueError("XLS template file does not exist")
 
-    # Write one file per institute.
+    # Take generic machine spreadsheet template ready to customise.
+    generic_template = args.xls_template
+
+    # Write out a customised template file for every institute.
     for i in vocabs.get_institutes(args.institution_id):
+        # Customise the template appropriately to the given institute:
+        #     1. Set the institute name
+        ### TODO, use set_institute_name_in_xls()
+        #     2. Set the applicable CMIP6 models for this institute
+        ### TODO, use set_applicable_models_in_xls()
+        #     3. Set the applicable CMIP6 experiments for this institute
+        ### TODO, use set_applicable_experiments_in_xls()
+
+        # Write out the customised template to a new XLS file.
+        ### TODO
+
+        # Place the template into the appropriate directory.
         dest = io_mgr.get_machines_spreadsheet(i)
         if not os.path.exists(dest):
-            logger.log("copying xls file for {}".format(i.raw_name))
-            shutil.copy(args.xls_template, dest)
+            logger.log("moving xls file for {}".format(i.raw_name))
+            shutil.copy(customised_template, dest)
 
 
 # Main entry point.
