@@ -13,10 +13,9 @@ import argparse
 import os
 import shutil
 
-from lib.utils import io_mgr
-from lib.utils import logger
-from lib.utils import vocabs
+from openpyxl import load_workbook
 
+from lib.utils import (io_mgr, logger, vocabs, constants)
 
 
 # Define command line argument parser.
@@ -36,15 +35,26 @@ _ARGS.add_argument(
     )
 
 
-def set_institute_name_in_xls(institution):
+def set_institute_name_in_xls(institution, spreadsheet):
+    """Set the institute name on the frontis and machine tab header."""
+    institution_name = institution.canonical_name.upper().encode()  # e.g. AER
+
+    # Write institute name on frontis page.
+    frontis_sheet = spreadsheet["Frontis"]
+    print(frontis_sheet)
+    frontis_sheet["B4"] = institution_name
+
+    # Write header including institute name on the machine tab.
+    machines_sheet = spreadsheet["Machine 1"]
+    machines_sheet["B1"] = "{} Machine for {}".format(
+        institution_name, constants.CMIP6_MIP_ERA.upper())
+
+
+def set_applicable_models_in_xls(institution, spreadsheet):
     pass
 
 
-def set_applicable_models_in_xls(institution):
-    pass
-
-
-def set_applicable_experiments_in_xls(institution):
+def set_applicable_experiments_in_xls(institution, spreadsheet):
     pass
 
 
@@ -56,21 +66,26 @@ def _main(args):
     if not os.path.exists(args.xls_template):
         raise ValueError("XLS template file does not exist")
 
-    # Take generic machine spreadsheet template ready to customise.
-    generic_template = args.xls_template
+    # Take generic machine spreadsheet template as Workbook ready to customise.
+    template_name = args.xls_template
+    generic_template = load_workbook(filename=template_name)
 
     # Write out a customised template file for every institute.
-    for i in vocabs.get_institutes(args.institution_id):
+    for institution in vocabs.get_institutes(args.institution_id):
         # Customise the template appropriately to the given institute:
         #     1. Set the institute name
-        ### TODO, use set_institute_name_in_xls()
+        set_institute_name_in_xls(institution, generic_template)
+
         #     2. Set the applicable CMIP6 models for this institute
-        ### TODO, use set_applicable_models_in_xls()
+        set_applicable_models_in_xls(institution, generic_template)
+
         #     3. Set the applicable CMIP6 experiments for this institute
-        ### TODO, use set_applicable_experiments_in_xls()
+        set_applicable_experiments_in_xls(institution, generic_template)
 
         # Write out the customised template to a new XLS file.
-        ### TODO
+        final_spreadsheet_name = "{}_{}_machines.xlsx".format(
+            constants.CMIP6_MIP_ERA, institution.canonical_name)
+        generic_template.save(final_spreadsheet_name)
 
         # Place the template into the appropriate directory.
         dest = io_mgr.get_machines_spreadsheet(i)
