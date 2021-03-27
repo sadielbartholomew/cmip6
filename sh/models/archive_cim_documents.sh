@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Main entry point.
 main()
@@ -15,7 +15,7 @@ main()
 		rm -rf $archive_folder/*.*
 	fi
 
-	pipenv run python $CMIP6_LIB/models/archive_cim_documents.py --destination=$archive_folder --institution-id=$1
+	pipenv run python $CMIP6_HOME/lib/models/archive_cim_documents.py --destination=$archive_folder --institution-id=$1
 }
 
 # Invoke entry point.

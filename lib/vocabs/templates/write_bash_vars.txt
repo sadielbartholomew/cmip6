@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+# ###############################################################
+# SECTION: WCRP CMIP6 VOCABULARY BASH VARS
+# ###############################################################
+
+# Activity ID - canonical name
+declare -a CMIP6_ACTIVITY_ID=(
+[CMIP6_ACTIVITY_ID])
+
+# Activity ID - raw name
+declare -a CMIP6_ACTIVITY_ID_RAW=(
+[CMIP6_ACTIVITY_ID_RAW])
+
+# Institution ID - canonical name
+declare -a CMIP6_INSTITUTION_ID=(
+[CMIP6_INSTITUTION_ID])
+
+# Institution ID - raw name
+declare -a CMIP6_INSTITUTION_ID_RAW=(
+[CMIP6_INSTITUTION_ID_RAW])
+
+# MIP-era ID - canonical name
+declare -a CMIP6_MIP_ERA=(
+[CMIP6_MIP_ERA])
+
+# MIP-era ID - raw name
+declare -a CMIP6_MIP_ERA_RAW=(
+[CMIP6_MIP_ERA_RAW])
+
+# Source ID - canonical name
+declare -a CMIP6_SOURCE_ID=(
+[CMIP6_SOURCE_ID])
+
+# Source ID - raw name
+declare -a CMIP6_SOURCE_ID_RAW=(
+[CMIP6_SOURCE_ID_RAW])
+
+# Experiment ID - canonical name
+declare -a CMIP6_EXPERIMENT_ID=(
+[CMIP6_EXPERIMENT_ID])
+
+# Experiment ID - raw name
+declare -a CMIP6_EXPERIMENT_ID_RAW=(
+[CMIP6_EXPERIMENT_ID_RAW])
+
+# ###############################################################
+# SECTION: ES-DOC SPECIALZATIONS
+# ###############################################################
+
+# Array of specifications.
+declare -a CMIP6_SPECIALIZATIONS=(
+	'aerosol'
+	'atmos'
+	'atmoschem'
+	'land'
+	'landice'
+	'ocean'
+	'ocnbgchem'
+	'seaice'
+	'toplevel'
+)
+
+# Array of realm specifications.
+declare -a CMIP6_REALM_SPECIALIZATIONS=(
+	'aerosol'
+	'atmos'
+	'atmoschem'
+	'land'
+	'landice'
+	'ocean'
+	'ocnbgchem'
+	'seaice'
+)

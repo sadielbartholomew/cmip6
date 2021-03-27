@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Main entry point.
 main()
@@ -9,9 +9,9 @@ main()
 		institution=all
 	fi
 
-	xls_template=$CMIP6_LIB/parties/templates/parties.xlsx
+	xls_template=$CMIP6_HOME/lib/parties/templates/parties.xlsx
 
-	pipenv run python $CMIP6_LIB/parties/init_xls.py --institution-id=$institution --xls-template=$xls_template
+	pipenv run python $CMIP6_HOME/lib/parties/init_xls.py --institution-id=$institution --xls-template=$xls_template
 }
 
 # Invoke entry point.

@@ -1,7 +1,4 @@
-#!/bin/bash
-
-# Import utils.
-source $CMIP6_BASH/utils.sh
+#!/usr/bin/env bash
 
 # Main entry point.
 main()
@@ -11,7 +8,7 @@ main()
 	declare input_dir=$ESDOC_HOME/repos/core/esdoc-docs/cmip6/experiments/cim-documents
 	declare output_dir=$ESDOC_HOME/repos/core/esdoc-docs/cmip6/conformances/spreadsheets
 	rm -rf $output_dir/*.*
-	pipenv run python $CMIP6_LIB/conformances/write_spreadsheets.py --input=$input_dir --output=$output_dir
+	pipenv run python $CMIP6_HOME/lib/conformances/write_spreadsheets.py --input=$input_dir --output=$output_dir
 
 	on_cmd_end "conformances-write-spreadsheets"
 }

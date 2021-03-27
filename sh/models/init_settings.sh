@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Main entry point.
 main()
@@ -9,7 +9,7 @@ main()
 		institution=all
 	fi
 
-	pipenv run python $CMIP6_LIB/models/init_settings.py --institution-id=$institution
+	pipenv run python $CMIP6_HOME/lib/models/init_settings.py --institution-id=$institution
 }
 
 # Invoke entry point.

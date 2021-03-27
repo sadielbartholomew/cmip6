@@ -1,10 +1,8 @@
-#!/bin/bash
-
-source $CMIP6_BASH/utils.sh
+#!/usr/bin/env bash
 
 function main()
 {
-	for INSTITUTION in "${INSTITUTION_ID[@]}"
+	for INSTITUTION in "${CMIP6_INSTITUTION_ID[@]}"
 	do
         if [ -d $ESDOC_HOME/repos/institutional/$INSTITUTION ]; then            
             do_clean $INSTITUTION

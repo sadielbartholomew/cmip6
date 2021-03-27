@@ -27,6 +27,28 @@ Who uses cmip6-shell ?
 
 ES-DOC software engineers.
 
+How to install cmip6-shell ?
+--------------------------------------
+
+```
+cd YOUR_WORKING_DIRECTORY
+git clone https://github.com/ES-DOC/cmip6
+cd cmip6
+pyenv local 2.7.18
+pipenv install
+
+cat >> $HOME/.bashrc <<- EOM
+
+# ----------------------------------------------------------------------
+# ES-DOC - CMIP6
+# ----------------------------------------------------------------------
+
+# Activate CMIP6 shell.
+. $(pwd)/activate
+
+EOM
+```
+
 Further Information ?
 --------------------------------------
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Main entry point.
 main()
@@ -9,7 +9,7 @@ main()
 	rm -rf $target_dir
 	mkdir -p $target_dir
 
-	pipenv run python $CMIP6_LIB/experiments/archive_cim_documents.py --source-dir=$source_dir --target-dir=$target_dir
+	pipenv run python $CMIP6_HOME/lib/experiments/archive_cim_documents.py --source-dir=$source_dir --target-dir=$target_dir
 }
 
 # Invoke entry point.

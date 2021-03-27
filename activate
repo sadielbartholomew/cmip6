@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # --------------------------------------------------------------------
 # PATHS
 # --------------------------------------------------------------------
@@ -5,12 +7,16 @@
 # Set paths
 export CMIP6_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export CMIP6_ROOT="$( cd "$( dirname "${CMIP6_HOME[0]}" )" && pwd )"
-export CMIP6_BASH=$CMIP6_HOME/sh
-export CMIP6_LIB=$CMIP6_HOME/cmip6
 
 # Ensure target scripts are executable.
-chmod a+x $CMIP6_BASH/*.sh
-chmod a+x $CMIP6_BASH/*/*.sh
+chmod a+x $CMIP6_HOME/sh/*/*.sh
+
+# ###############################################################
+# UTILS / VOCABS
+# ###############################################################
+
+source "$CMIP6_HOME"/sh/utils/main.sh
+source "$CMIP6_HOME"/sh/vocabs/definitions.sh
 
 # --------------------------------------------------------------------
 # COMMAND EXECUTION
@@ -19,14 +25,14 @@ chmod a+x $CMIP6_BASH/*/*.sh
 # Command executor.
 exec_cmd()
 {
-	source $CMIP6_BASH/utils.sh
+	local CMD_TYPE=${1}
 
 	log_banner
-	log $1" :: BEGINS"
+	log "$CMD_TYPE :: BEGINS"
 	activate_venv
 	log_banner
 
-	target=$CMIP6_BASH/$2
+	target="$CMIP6_HOME"/sh/$2
 	if [ "$3" ] && [ "$4" ] && [ "$5" ]; then
 		source $target $3 $4 $5
 	elif [ "$3" ] && [ "$4" ]; then
@@ -38,15 +44,16 @@ exec_cmd()
 	fi
 
 	log_banner
-	log $1" :: ENDS"
+	log "$CMD_TYPE :: ENDS"
 	log_banner
-
-	popd -1
 }
 
 # --------------------------------------------------------------------
 # ALIASES
 # --------------------------------------------------------------------
+
+# ... setup
+alias cmip6-setup='exec_cmd init utils/setup.sh'
 
 # ... citations
 alias cmip6-citations-init-xls='exec_cmd citations-init-xls citations/init_xls.sh $1'
