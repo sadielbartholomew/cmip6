@@ -9,11 +9,11 @@ main()
 	for specialization in "${CMIP6_SPECIALIZATIONS[@]}"
 	do
 		log "pushing "$specialization
-		pushd $CMIP6_ROOT/cmip6-specializations-$specialization
+		pushd $CMIP6_HOME/repos/specializations/cmip6-specializations-$specialization
 		git add .
 		git commit -m $comment
 		git push -v origin master:master
-		popd -1
+		popd
 	done
 
 	# Push viewer.
@@ -21,7 +21,7 @@ main()
 	git add .
 	git commit -m $comment
 	git push -v origin master:master
-	popd -1
+	popd
 }
 
 # Invoke entry point.

@@ -10,7 +10,7 @@ main()
 		log "cloning "$specialization
 		git clone https://github.com/ES-DOC/cmip6-specializations-$specialization.git
 	done
-	popd -1
+	popd
 }
 
 # Invoke entry point.

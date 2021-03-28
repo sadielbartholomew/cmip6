@@ -8,7 +8,7 @@ main()
 		log "GITHUB : pulling  "$institution_id
 		pushd $ESDOC_HOME/repos/institutional/$institution_id
 		git pull
-		popd -1
+		popd
 	done
 }
 

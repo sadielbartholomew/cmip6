@@ -11,7 +11,7 @@ main()
 		git add *
 		git commit -S -a -m $MSG
 		git push origin master
-		popd -1
+		popd
 	done
 }
 

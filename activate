@@ -1,46 +1,44 @@
 #!/usr/bin/env bash
 
-# --------------------------------------------------------------------
+# ###############################################################
 # PATHS
-# --------------------------------------------------------------------
+# ###############################################################
 
-# Set paths
 export CMIP6_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-export CMIP6_ROOT="$( cd "$( dirname "${CMIP6_HOME[0]}" )" && pwd )"
 
 # Ensure target scripts are executable.
 chmod a+x $CMIP6_HOME/sh/*/*.sh
 
 # ###############################################################
-# UTILS / VOCABS
+# UTILS
 # ###############################################################
 
 source "$CMIP6_HOME"/sh/utils/main.sh
-source "$CMIP6_HOME"/sh/vocabs/definitions.sh
 
-# --------------------------------------------------------------------
-# COMMAND EXECUTION
-# --------------------------------------------------------------------
+# ###############################################################
+# COMMANDS
+# ###############################################################
 
 # Command executor.
 exec_cmd()
 {
 	local CMD_TYPE=${1}
+	local CMD_SCRIPT=${2}
+	local CMD_TARGET="$CMIP6_HOME"/sh/"$CMD_SCRIPT"
 
 	log_banner
 	log "$CMD_TYPE :: BEGINS"
 	activate_venv
 	log_banner
 
-	target="$CMIP6_HOME"/sh/$2
 	if [ "$3" ] && [ "$4" ] && [ "$5" ]; then
-		source $target $3 $4 $5
+		source $CMD_TARGET "$3" "$4" "$5"
 	elif [ "$3" ] && [ "$4" ]; then
-		source $target $3 $4 ""
+		source $CMD_TARGET "$3" "$4" ""
 	elif [ "$3" ]; then
-		source $target $3 "" ""
+		source $CMD_TARGET "$3" "" ""
 	else
-		source $target ""
+		source $CMD_TARGET ""
 	fi
 
 	log_banner
@@ -53,7 +51,7 @@ exec_cmd()
 # --------------------------------------------------------------------
 
 # ... setup
-alias cmip6-setup='exec_cmd init utils/setup.sh'
+alias cmip6-setup='exec_cmd setup utils/setup.sh'
 
 # ... citations
 alias cmip6-citations-init-xls='exec_cmd citations-init-xls citations/init_xls.sh $1'

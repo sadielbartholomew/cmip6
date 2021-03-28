@@ -3,7 +3,7 @@
 # Main entry point.
 main()
 {
-	declare source_dir=$ESDOC_HOME/repos/core/esdoc-docs/cmip6/experiments/cim-documents
+	declare source_dir=$CMIP6_HOME/repos/libs/esdoc-docs/cmip6/experiments/cim-documents
 	declare target_dir=$ESDOC_HOME/repos/core/esdoc-archive/esdoc/cmip6/spreadsheet-experiments
 
 	rm -rf $target_dir

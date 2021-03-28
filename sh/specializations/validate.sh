@@ -5,11 +5,11 @@ main()
 {
 	if [ "$1" ]; then
 		declare specialization=$1
-		pipenv run python $CMIP6_ROOT/cmip6-specializations-$specialization/validate
+		pipenv run python $CMIP6_HOME/repos/specializations/cmip6-specializations-$specialization/validate
 	else
 		for specialization in "${CMIP6_SPECIALIZATIONS[@]}"
 		do
-			pipenv run python $CMIP6_ROOT/cmip6-specializations-$specialization/validate
+			pipenv run python $CMIP6_HOME/repos/specializations/cmip6-specializations-$specialization/validate
 		done
 	fi
 }

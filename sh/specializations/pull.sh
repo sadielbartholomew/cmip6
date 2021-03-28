@@ -8,9 +8,9 @@ main()
 		log_banner
 		log "pulling "$specialization
 		log_banner
-		pushd $CMIP6_ROOT/cmip6-specializations-$specialization
+		pushd $CMIP6_HOME/repos/specializations/cmip6-specializations-$specialization
 		git pull
-		popd -1
+		popd
 	done
 }
 

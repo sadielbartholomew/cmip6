@@ -3,9 +3,9 @@
 # Main entry point.
 main()
 {
-	declare io_dir=$ESDOC_HOME/repos/core/esdoc-docs/cmip6/experiments/cim-documents
-	declare spreadsheet=$ESDOC_HOME/repos/core/esdoc-docs/cmip6/experiments/spreadsheet/experiments.xlsx
-	declare identifiers=$ESDOC_HOME/repos/core/esdoc-docs/cmip6/experiments/spreadsheet/document-identifiers.txt
+	declare io_dir=$CMIP6_HOME/repos/libs/esdoc-docs/cmip6/experiments/cim-documents
+	declare spreadsheet=$CMIP6_HOME/repos/libs/esdoc-docs/cmip6/experiments/spreadsheet/experiments.xlsx
+	declare identifiers=$CMIP6_HOME/repos/libs/esdoc-docs/cmip6/experiments/spreadsheet/document-identifiers.txt
 
 	rm -rf $io_dir
 	mkdir $io_dir

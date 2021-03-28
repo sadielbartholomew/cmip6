@@ -9,7 +9,7 @@ main()
     do
         git clone https://github.com/ES-DOC-INSTITUTIONAL/$institution_id.git
     done
-    popd -1
+    popd
 }
 
 # Invoke entry point.
