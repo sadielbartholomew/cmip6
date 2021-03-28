@@ -18,14 +18,14 @@ from lib.utils import logger
 
 
 # Home directory.
-ESDOC_HOME = os.getenv('ESDOC_HOME')
+CMIP6_HOME = os.getenv('CMIP6_HOME')
 
 
 def get_folder(parts):
     """Returns path to an institute's mip-era repository.
 
     """
-    path = os.path.join(ESDOC_HOME, 'repos')
+    path = os.path.join(CMIP6_HOME, 'repos')
     path = os.path.join(path, 'institutional')
 
     for part in parts:

@@ -42,7 +42,7 @@ def _get_settings(institution_id):
 
     """
     # Set path.
-    fpath = os.getenv('ESDOC_HOME')
+    fpath = os.getenv('CMIP6_HOME')
     fpath = os.path.join(fpath, 'repos')
     fpath = os.path.join(fpath, 'institutional')
     fpath = os.path.join(fpath, institution_id)

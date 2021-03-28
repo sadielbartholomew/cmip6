@@ -3,23 +3,24 @@
 # Main entry point.
 main()
 {
-	declare comment=$1
+	local COMMENT=${1}
+	local SPECIALIZATION
 
 	# Push specializations.
-	for specialization in "${CMIP6_SPECIALIZATIONS[@]}"
+	for SPECIALIZATION in "${CMIP6_SPECIALIZATIONS[@]}"
 	do
 		log "pushing "$specialization
-		pushd $CMIP6_HOME/repos/specializations/cmip6-specializations-$specialization
+		pushd "$CMIP6_HOME"/repos/specializations/cmip6-specializations-"$SPECIALIZATION"
 		git add .
-		git commit -m $comment
+		git commit -m "$COMMENT"
 		git push -v origin master:master
 		popd
 	done
 
 	# Push viewer.
-	pushd $ESDOC_HOME/repos/esdoc-web-view-specialization
+	pushd "$CMIP6_HOME"/repos/libs/esdoc-web-view-specialization
 	git add .
-	git commit -m $comment
+	git commit -m "$COMMENT"
 	git push -v origin master:master
 	popd
 }

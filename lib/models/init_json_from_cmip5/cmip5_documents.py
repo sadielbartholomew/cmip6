@@ -26,7 +26,7 @@ def init(institution_id):
     DOCUMENTS = list()
 
     # Set root folder path.
-    fpath = os.getenv('ESDOC_HOME')
+    fpath = os.getenv('CMIP6_HOME')
     fpath = os.path.join(fpath, 'repos')
     fpath = os.path.join(fpath, 'institutional')
     fpath = os.path.join(fpath, institution_id)

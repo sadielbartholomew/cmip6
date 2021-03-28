@@ -25,7 +25,6 @@ LOG_LEVEL_FATAL = 'FATAL'
 
 # Defaults.
 _DEFAULT_APP = 'CMIP6'
-_DEFAULT_INSTITUTE = 'ESDOC'
 
 # Text to display when passed a null message.
 _NULL_MSG = '-------------------------------------------------------------------------------'

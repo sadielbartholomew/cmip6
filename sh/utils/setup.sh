@@ -3,19 +3,20 @@
 # Main entry point.
 function _main()
 {
-    local SPECIALIZATION
+    local ARCHIVE
     local INSTITUTION_ID
     local LIB
+    local SPECIALIZATION
 
     log "setting directories"
     mkdir -p "$CMIP6_HOME"/repos
 
     log "setting repos:"
-    log "... specializations:"
-	for SPECIALIZATION in "${CMIP6_SPECIALIZATIONS[@]}"
-	do     
-        _set_repo "specializations" cmip6-specializations-"$SPECIALIZATION" https://github.com/ES-DOC/cmip6-specializations-"$SPECIALIZATION".git
-	done
+    log "... archives:"
+	for ARCHIVE in "${CMIP6_ARCHIVES[@]}"
+	do      
+        _set_repo "archives" "$LIB" https://github.com/ES-DOC/"$ARCHIVE".git
+	done     
     log "... institutions:"
 	for INSTITUTION_ID in "${CMIP6_INSTITUTION_ID[@]}"
 	do     
@@ -26,6 +27,11 @@ function _main()
 	do      
         _set_repo "libs" "$LIB" https://github.com/ES-DOC/"$LIB".git
 	done       
+    log "... specializations:"
+	for SPECIALIZATION in "${CMIP6_SPECIALIZATIONS[@]}"
+	do     
+        _set_repo "specializations" cmip6-specializations-"$SPECIALIZATION" https://github.com/ES-DOC/cmip6-specializations-"$SPECIALIZATION".git
+	done
 }
 
 function _set_repo()
@@ -50,7 +56,6 @@ function _set_repo()
         git clone "$REPO_URL" > /dev/null 2>&1
         popd
     fi
-
 }
 
 # Invoke entry point.

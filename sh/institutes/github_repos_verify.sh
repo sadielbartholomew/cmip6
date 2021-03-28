@@ -9,7 +9,7 @@ main()
 		institution=all
 	fi
 
-	pipenv run python $CMIP6_HOME/lib/institutes/github_repos_verify.py --institution-id=$1
+	pipenv run python "$CMIP6_HOME"/lib/institutes/github_repos_verify.py --institution-id=$1
 }
 
 # Invoke entry point.

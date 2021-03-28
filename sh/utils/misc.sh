@@ -5,11 +5,11 @@ function activate_venv()
 {
 	export PYTHONPATH=$CMIP6_HOME:$PYTHONPATH
 	pushd $CMIP6_HOME
-	# source $CMIP6_HOME/lib_VENV/bin/activate
+	# source "$CMIP6_HOME"/lib_VENV/bin/activate
 	# log "venv activated @ "$CMIP6_HOME/lib_VENV
 }
 
-# Wraps standard echo by adding ESDOC prefix.
+# Wraps standard echo.
 log()
 {
 	declare now=`date +%Y-%m-%dT%H:%M:%S:000000`

@@ -7,7 +7,7 @@ main()
 
 	for institution_id in "${CMIP6_INSTITUTION_ID[@]}"
 	do
-		pushd $ESDOC_HOME/repos/institutional/$institution_id
+		pushd "$CMIP6_HOME"/repos/institutional/$institution_id
 		git add *
 		git commit -S -a -m $MSG
 		git push origin master

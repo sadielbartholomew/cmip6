@@ -11,7 +11,7 @@ main()
 
 	xls_template=$CMIP6_HOME/lib/machines/templates/machines.xlsx
 
-	pipenv run python $CMIP6_HOME/lib/machines/init_xls.py --institution-id=$institution --xls-template=$xls_template
+	pipenv run python "$CMIP6_HOME"/lib/machines/init_xls.py --institution-id=$institution --xls-template=$xls_template
 }
 
 # Invoke entry point.

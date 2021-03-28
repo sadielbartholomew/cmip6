@@ -7,7 +7,7 @@
 export CMIP6_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Ensure target scripts are executable.
-chmod a+x $CMIP6_HOME/sh/*/*.sh
+chmod a+x "$CMIP6_HOME"/sh/*/*.sh
 
 # ###############################################################
 # UTILS

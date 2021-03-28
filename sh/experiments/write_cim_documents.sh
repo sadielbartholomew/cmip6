@@ -10,7 +10,7 @@ main()
 	rm -rf $io_dir
 	mkdir $io_dir
 
-	pipenv run python $CMIP6_HOME/lib/experiments/write_cim_documents --io-dir=$io_dir --spreadsheet=$spreadsheet --identifiers=$identifiers
+	pipenv run python "$CMIP6_HOME"/lib/experiments/write_cim_documents --io-dir=$io_dir --spreadsheet=$spreadsheet --identifiers=$identifiers
 }
 
 # Invoke entry point.

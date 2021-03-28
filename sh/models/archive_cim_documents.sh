@@ -3,19 +3,20 @@
 # Main entry point.
 main()
 {
-	archive_folder=$ESDOC_ARCHIVE_HOME/esdoc/cmip6/spreadsheet-models
-
-	if [ ! -d "$archive_folder" ]; then
-		mkdir $archive_folder
+	local ARCHIVE_FOLDER 
+	
+	ARCHIVE_FOLDER=$CMIP6_HOME/repos/archives/esdoc-archive/esdoc/cmip6/spreadsheet-models
+	if [ ! -d "$ARCHIVE_FOLDER" ]; then
+		mkdir "$ARCHIVE_FOLDER"
 	fi
 
 	if [ "$1" ]; then
-		rm -rf $archive_folder/cmip6_$1*.*
+		rm -rf "$ARCHIVE_FOLDER"/cmip6_$1*.*
 	else
-		rm -rf $archive_folder/*.*
+		rm -rf "$ARCHIVE_FOLDER"/*.*
 	fi
 
-	pipenv run python $CMIP6_HOME/lib/models/archive_cim_documents.py --destination=$archive_folder --institution-id=$1
+	pipenv run python "$CMIP6_HOME"/lib/models/archive_cim_documents.py --destination="$ARCHIVE_FOLDER" --institution-id=$1
 }
 
 # Invoke entry point.

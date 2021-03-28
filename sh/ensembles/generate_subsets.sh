@@ -3,18 +3,23 @@
 # Main entry point.
 function main()
 {
+	local ARCHIVE_DIR
+	local INSTITUTION
+	local OUTPUT_DIR
+
 	on_cmd_begin "ensembles-generate-subsets"
 
 	if [ "$1" ]; then
-		declare institution=$1
+		INSTITUTION="$1"
 	else
-		declare institution=all
+		INSTITUTION="all"
 	fi
-    declare archive_dir=$ESDOC_HOME/repos/core/esdoc-cdf2cim-archive/data
-	declare output_dir=$ESDOC_HOME/repos/core/esdoc-cdf2cim-archive/subset
-	pipenv run python $CMIP6_HOME/lib/ensembles/generate_subsets.py --institution-id=$institution --archive-directory=$archive_dir --output-directory=$output_dir
+    ARCHIVE_DIR="$CMIP6_HOME"/repos/archives/esdoc-cdf2cim-archive/data
+	OUTPUT_DIR="$CMIP6_HOME"/repos/archives/esdoc-cdf2cim-archive/subset
 
-	on_cmd_begin "ensembles-generate-subsets"
+	pipenv run python "$CMIP6_HOME"/lib/ensembles/generate_subsets.py --institution-id="$INSTITUTION" --archive-directory="$ARCHIVE_DIR" --output-directory="$OUTPUT_DIR"
+
+	on_cmd_end "ensembles-generate-subsets"
 }
 
 # Invoke entry point.

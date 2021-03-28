@@ -8,7 +8,7 @@ main()
 
 	rm -rf $output_dir/*.json
 
-	pipenv run python $CMIP6_HOME/lib/experiments/write_config.py --input=$input_dir --output=$output_dir
+	pipenv run python "$CMIP6_HOME"/lib/experiments/write_config.py --input=$input_dir --output=$output_dir
 }
 
 # Invoke entry point.
