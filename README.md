@@ -31,11 +31,26 @@ How to install cmip6-shell ?
 --------------------------------------
 
 ```
+# Set repo.
 cd YOUR_WORKING_DIRECTORY
 git clone https://github.com/ES-DOC/cmip6
-cd cmip6
+
+# Set virtual environment.
+cd ./cmip6
 pyenv local 2.7.18
 pipenv install
+
+# Setup.
+export PYESSV_ARCHIVE_HOME=$(pwd)/archives/pyessv-archive
+source $(pwd)/activate
+cmip6-setup
+```
+
+How to auto-activate cmip6-shell ?
+--------------------------------------
+
+```
+cd YOUR_WORKING_DIRECTORY
 
 cat >> $HOME/.bashrc <<- EOM
 
@@ -43,11 +58,15 @@ cat >> $HOME/.bashrc <<- EOM
 # ES-DOC - CMIP6
 # ----------------------------------------------------------------------
 
+# Set path to pyessv archive.
+export PYESSV_ARCHIVE_HOME=$(pwd)/archives/pyessv-archive
+
 # Activate CMIP6 shell.
-. $(pwd)/activate
+source $(pwd)/activate
 
 EOM
 ```
+
 
 Further Information ?
 --------------------------------------
