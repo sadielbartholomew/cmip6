@@ -76,14 +76,14 @@ alias cmip6-reset-experiments=_reset_experiments
 
 # ... institutes
 alias cmip6-institutes-list='exec_cmd institutes-list institutes/list.sh'
-alias cmip6-institutes-github-repos-clean='exec_cmd institutes-github-repos-clean institutes/gh_repos_clean.sh'
-alias cmip6-institutes-github-repos-clone='exec_cmd institutes-github-repos-clone institutes/github_repos_clone.sh'
-alias cmip6-institutes-github-repos-pull='exec_cmd institutes-github-repos-pull institutes/github_repos_pull.sh'
-alias cmip6-institutes-github-repos-push='exec_cmd institutes-github-repos-push institutes/github_repos_push.sh'
-alias cmip6-institutes-github-repos-status='exec_cmd institutes-github-repos-clone institutes/github_repos_status.sh'
-alias cmip6-institutes-github-repos-sync='exec_cmd institutes-github-repos-sync institutes/github_repos_sync.sh'
-alias cmip6-institutes-github-repos-verify='exec_cmd institutes-github-repos-verify institutes/github_repos_verify.sh $1'
-alias cmip6-institutes-github-teams-sync='exec_cmd institutes-github-teams-sync institutes/github_teams_sync.sh'
+alias cmip6-institutes-repos-clean='exec_cmd institutes-github-repos-clean institutes/github_repos_clean.sh'
+alias cmip6-institutes-repos-clone='exec_cmd institutes-github-repos-clone institutes/github_repos_clone.sh'
+alias cmip6-institutes-repos-pull='exec_cmd institutes-github-repos-pull institutes/github_repos_pull.sh'
+alias cmip6-institutes-repos-push='exec_cmd institutes-github-repos-push institutes/github_repos_push.sh'
+alias cmip6-institutes-repos-status='exec_cmd institutes-github-repos-clone institutes/github_repos_status.sh'
+alias cmip6-institutes-repos-sync='exec_cmd institutes-github-repos-sync institutes/github_repos_sync.sh'
+alias cmip6-institutes-repos-verify='exec_cmd institutes-github-repos-verify institutes/github_repos_verify.sh $1'
+alias cmip6-institutes-teams-sync='exec_cmd institutes-github-teams-sync institutes/github_teams_sync.sh'
 
 # ... models
 alias cmip6-models-archive-cim-documents='exec_cmd models-archive-cim-documents models/archive_cim_documents.sh'
@@ -103,12 +103,12 @@ alias cmip6-models-reset-json='exec_cmd models-reset-json models/reset_json.sh'
 alias cmip6-parties-init-xls='exec_cmd parties-init-xls parties/init_xls.sh $1'
 alias cmip6-parties-generate-json='exec_cmd parties-generate-json parties/generate_json.sh $1'
 
-# ... specializations
-alias cmip6-specializations-clone='exec_cmd specializations-clone specializations/clone.sh'
+# ... specializations 
 alias cmip6-specializations-generate='exec_cmd specializations-generate specializations/generate.sh'
-alias cmip6-specializations-pull='exec_cmd specializations-pull specializations/pull.sh'
-alias cmip6-specializations-push='exec_cmd specializations-push specializations/push.sh'
-alias cmip6-specializations-status='exec_cmd specializations-status specializations/status.sh'
+alias cmip6-specializations-repos-clone='exec_cmd specializations-clone specializations/github_repos_clone.sh'
+alias cmip6-specializations-repos-pull='exec_cmd specializations-pull specializations/github_repos_pull.sh'
+alias cmip6-specializations-repos-push='exec_cmd specializations-push specializations/github_repos_push.sh'
+alias cmip6-specializations-repos-status='exec_cmd specializations-status specializations/github_repos_status.sh'
 alias cmip6-specializations-sync-cim-profile='exec_cmd specializations-sync-cim-profile specializations/sync_cim_profile.sh'
 alias cmip6-specializations-sync-definitions='exec_cmd specializations-sync-definitions specializations/sync_definitions.sh'
 alias cmip6-specializations-sync-mappings='exec_cmd specializations-sync-mappings specializations/sync_mappings.sh'
