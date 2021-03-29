@@ -3,6 +3,8 @@
 # Main entry point.
 main()
 {
+	local SPECIALIZATION
+
 	if [ "$1" ]; then
 		declare specialization=$1
 		log_banner

@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-# Activates a virtual environment.
-function activate_venv()
-{
-	export PYTHONPATH=$CMIP6_HOME:$PYTHONPATH
-	pushd $CMIP6_HOME
-	# source "$CMIP6_HOME"/lib_VENV/bin/activate
-	# log "venv activated @ "$CMIP6_HOME/lib_VENV
-}
-
 # Wraps standard echo.
 log()
 {
@@ -40,7 +31,6 @@ on_cmd_begin()
 {
 	log_banner
 	log $1" :: BEGINS"
-	activate_venv
 	log_banner
 }
 
@@ -48,7 +38,6 @@ on_cmd_begin()
 on_cmd_end()
 {
 	log_banner
-	deactivate
 	log $1" :: ENDS"
 	log_banner
 }

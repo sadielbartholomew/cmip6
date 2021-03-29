@@ -3,9 +3,9 @@
 # Main entry point.
 main()
 {
-	activate_venv
-
+	pushd "$CMIP6_HOME"
 	pipenv run python "$CMIP6_HOME"/lib/institutes/github_repos_sync.py
+	popd
 }
 
 # Invoke entry point.

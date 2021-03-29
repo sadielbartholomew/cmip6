@@ -3,15 +3,21 @@
 # Main entry point.
 main()
 {
-	local MSG=${1}
+	local COMMENT=${1}
+    local INSTITUTION_ID
 
-	for institution_id in "${CMIP6_INSTITUTION_ID[@]}"
+	for INSTITUTION_ID in "${CMIP6_INSTITUTION_ID[@]}"
 	do
-		pushd "$CMIP6_HOME"/repos/institutional/$institution_id
-		git add *
-		git commit -S -a -m $MSG
-		git push origin master
-		popd
+		if [ -d "$CMIP6_HOME"/repos/institutions/"$INSTITUTION_ID" ]; then
+			log "GITHUB : pushing  $INSTITUTION_ID"
+			pushd "$CMIP6_HOME"/repos/institutions/"$INSTITUTION_ID"
+			git add *
+			git commit -S -a -m "$COMMENT"
+			git push origin master
+			popd
+		else
+			log "institutional repo needs to be installed: $INSTITUTION_ID"
+		fi
 	done
 }
 

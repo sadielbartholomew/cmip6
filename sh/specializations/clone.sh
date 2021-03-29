@@ -3,14 +3,20 @@
 # Main entry point.
 main()
 {
-	mkdir -p $CMIP6_ROOT
-	pushd $CMIP6_ROOT
-	for specialization in "${CMIP6_SPECIALIZATIONS[@]}"
-	do
-		log "cloning "$specialization
-		git clone https://github.com/ES-DOC/cmip6-specializations-$specialization.git
-	done
-	popd
+    local SPECIALIZATION
+
+    if [ ! -d "$CMIP6_HOME"/repos/specializations ]; then
+        mkdir -p "$CMIP6_HOME"/repos/specializations
+    fi
+
+    pushd "$CMIP6_HOME"/repos/specializations
+    for SPECIALIZATION in "${CMIP6_SPECIALIZATIONS[@]}"
+    do
+        if [ ! -d "$CMIP6_HOME"/repos/specializations/cmip6-specializations-"$SPECIALIZATION" ]; then
+            git clone https://github.com/ES-DOC-INSTITUTIONAL/cmip6-specializations-"$SPECIALIZATION".git
+        fi
+    done
+    popd
 }
 
 # Invoke entry point.

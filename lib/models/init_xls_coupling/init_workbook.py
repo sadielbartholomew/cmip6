@@ -9,7 +9,7 @@ def init(ctx):
     """Write topic workbook.
 
     """
-    path = os.path.join(os.getenv('CMIP6_HOME'), 'repos/institutional')
+    path = os.path.join(os.getenv('CMIP6_HOME'), 'repos/institutions')
     path = os.path.join(path, ctx.institution_id)
     path = os.path.join(path, ctx.CMIP6_MIP_ERA)
     path = os.path.join(path, 'models')

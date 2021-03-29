@@ -134,6 +134,8 @@ def get_teams(predicate=None):
     entities = []
     _get_entities(endpoint, predicate, entities)
 
+    print(entities)
+
     return {i['name']: GitHubTeam(i) for i in entities}
 
 

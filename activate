@@ -9,6 +9,9 @@ export CMIP6_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Ensure target scripts are executable.
 chmod a+x "$CMIP6_HOME"/sh/*/*.sh
 
+# Set python path.
+export PYTHONPATH=$CMIP6_HOME:$PYTHONPATH
+
 # ###############################################################
 # UTILS
 # ###############################################################
@@ -62,6 +65,14 @@ alias cmip6-experiments-archive-cim-documents='exec_cmd experiments-archive-cim-
 alias cmip6-experiments-write-cim-documents='exec_cmd experiments-write-cim-documents experiments/write_cim_documents.sh'
 alias cmip6-experiments-write-config='exec_cmd experiments-write-config experiments/write_config.sh'
 alias cmip6-experiments-write-d3='exec_cmd experiments-write-d3 experiments/write_d3.sh'
+_reset_experiments()
+{
+	cmip6-experiments-write-cim-documents
+	cmip6-experiments-write-config
+	cmip6-experiments-write-d3
+	cmip6-experiments-archive-cim-documents
+}
+alias cmip6-reset-experiments=_reset_experiments
 
 # ... institutes
 alias cmip6-institutes-list='exec_cmd institutes-list institutes/list.sh'
@@ -111,19 +122,6 @@ alias cmip6-vocabs-write-bash-vars='exec_cmd vocabs-write-bash-vars vocabs/write
 
 # ... machines and performances
 alias cmip6-machines-init-xls='exec_cmd machines-init-xls machines/init_machines_xls.sh $1'
-
-# --------------------------------------------------------------------
-# COMPOSITE COMMANDS
-# --------------------------------------------------------------------
-
-_reset_experiments()
-{
-	cmip6-experiments-write-cim-documents
-	cmip6-experiments-write-config
-	cmip6-experiments-write-d3
-	cmip6-experiments-archive-cim-documents
-}
-alias cmip6-reset-experiments=_reset_experiments
 
 _reset_all()
 {

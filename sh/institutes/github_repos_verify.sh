@@ -3,13 +3,15 @@
 # Main entry point.
 main()
 {
+	local INSTITUTION_ID
+
 	if [ "$1" ]; then
-		institution=$1
+		INSTITUTION_ID=$1
 	else
-		institution=all
+		INSTITUTION_ID=all
 	fi
 
-	pipenv run python "$CMIP6_HOME"/lib/institutes/github_repos_verify.py --institution-id=$1
+	pipenv run python "$CMIP6_HOME"/lib/institutes/github_repos_verify.py --institution-id="$INSTITUTION_ID"
 }
 
 # Invoke entry point.

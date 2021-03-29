@@ -3,12 +3,18 @@
 # Main entry point.
 main()
 {
-	for institution_id in "${CMIP6_INSTITUTION_ID[@]}"
+    local INSTITUTION_ID
+	
+	for INSTITUTION_ID in "${CMIP6_INSTITUTION_ID[@]}"
 	do
-		log "GITHUB : pulling  "$institution_id
-		pushd "$CMIP6_HOME"/repos/institutional/$institution_id
-		git pull
-		popd
+		if [ -d "$CMIP6_HOME"/repos/institutions/"$INSTITUTION_ID" ]; then
+			log "GITHUB : pulling  $INSTITUTION_ID"
+			pushd "$CMIP6_HOME"/repos/institutions/"$INSTITUTION_ID"
+			git pull > /dev/null 2>&1
+			popd
+		else
+			log "institutional repo needs to be installed: $INSTITUTION_ID"
+		fi
 	done
 }
 

@@ -6,7 +6,7 @@ function main()
 
 	for INSTITUTION in "${CMIP6_INSTITUTION_ID[@]}"
 	do
-        if [ -d "$CMIP6_HOME"/repos/institutional/"$INSTITUTION" ]; then            
+        if [ -d "$CMIP6_HOME"/repos/institutions/"$INSTITUTION" ]; then            
             do_clean "$INSTITUTION"
         else
             log "insititute repo must be created: $INSTITUTION"
@@ -16,7 +16,7 @@ function main()
 
 function do_clean() {
     local INSTITUTION=${1}
-    local REPO="$CMIP6_HOME"/repos/institutional/"$INSTITUTION"
+    local REPO="$CMIP6_HOME"/repos/institutions/"$INSTITUTION"
 
     pushd "$REPO"
     if [ ! -d "$REPO"/cmip6 ]; then            

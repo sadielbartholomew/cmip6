@@ -8,7 +8,10 @@ main()
 	declare input_dir=$CMIP6_HOME/repos/libs/esdoc-docs/cmip6/experiments/cim-documents
 	declare output_dir=$CMIP6_HOME/repos/libs/esdoc-docs/cmip6/conformances/spreadsheets
 	rm -rf $output_dir/*.*
+
+	pushd "$CMIP6_HOME"
 	pipenv run python "$CMIP6_HOME"/lib/conformances/write_spreadsheets.py --input=$input_dir --output=$output_dir
+	popd
 
 	on_cmd_end "conformances-write-spreadsheets"
 }
