@@ -77,7 +77,6 @@ alias cmip6-reset-experiments=_reset_experiments
 # ... institutes
 alias cmip6-institutes-list='exec_cmd institutes-list institutes/list.sh'
 alias cmip6-institutes-repos-clean='exec_cmd institutes-github-repos-clean institutes/github_repos_clean.sh'
-alias cmip6-institutes-repos-clone='exec_cmd institutes-github-repos-clone institutes/github_repos_clone.sh'
 alias cmip6-institutes-repos-pull='exec_cmd institutes-github-repos-pull institutes/github_repos_pull.sh'
 alias cmip6-institutes-repos-push='exec_cmd institutes-github-repos-push institutes/github_repos_push.sh'
 alias cmip6-institutes-repos-status='exec_cmd institutes-github-repos-clone institutes/github_repos_status.sh'
@@ -105,7 +104,6 @@ alias cmip6-parties-generate-json='exec_cmd parties-generate-json parties/genera
 
 # ... specializations 
 alias cmip6-specializations-generate='exec_cmd specializations-generate specializations/generate.sh'
-alias cmip6-specializations-repos-clone='exec_cmd specializations-clone specializations/github_repos_clone.sh'
 alias cmip6-specializations-repos-pull='exec_cmd specializations-pull specializations/github_repos_pull.sh'
 alias cmip6-specializations-repos-push='exec_cmd specializations-push specializations/github_repos_push.sh'
 alias cmip6-specializations-repos-status='exec_cmd specializations-status specializations/github_repos_status.sh'
