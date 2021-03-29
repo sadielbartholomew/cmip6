@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	output_fpath=$CMIP6_HOME/sh/vocabs/write_bash_vars_output.txt
 	
@@ -14,4 +14,4 @@ main()
 }
 
 # Invoke entry point.
-main
+_main

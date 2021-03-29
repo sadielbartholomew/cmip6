@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
-	pushd "$CMIP6_HOME"
+	pushd "$CMIP6_HOME" || exit
 	pipenv run python "$CMIP6_HOME"/lib/institutes/github_teams_sync.py
-	popd
+	popd || exit
 }
 
 # Invoke entry point.
-main
+_main

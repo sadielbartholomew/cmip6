@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	local PATH_TO_REPO
 	local REPO_NAME
@@ -25,10 +25,10 @@ function _validate()
 
 	REPO_NAME=cmip6-specializations-"$SPECIALIZATION"
 	PATH_TO_REPO=$(get_path_to_repo "specializations" "$REPO_NAME")
-	pushd $CMIP6_HOME
+	pushd $CMIP6_HOME || exit
 	pipenv run python "$PATH_TO_REPO"/validate
-	popd
+	popd || exit
 }
 
 # Invoke entry point.
-main $1
+_main "$1"

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
     local SPECIALIZATION
 	local REPO_NAME
@@ -13,9 +13,9 @@ main()
 		PATH_TO_REPO=$(get_path_to_repo "specializations" "$REPO_NAME")
 		if [ -d "$PATH_TO_REPO" ]; then
 			log "GITHUB : pulling  $SPECIALIZATION"
-			pushd "$PATH_TO_REPO"
+			pushd "$PATH_TO_REPO" || exit
 			git pull > /dev/null 2>&1
-			popd
+			popd || exit
 		else
 			log "specialization repo needs to be installed: $SPECIALIZATION"
 		fi
@@ -23,4 +23,4 @@ main()
 }
 
 # Invoke entry point.
-main
+_main

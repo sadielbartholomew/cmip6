@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	local INSTITUTION_ID
 
@@ -15,4 +15,4 @@ main()
 }
 
 # Invoke entry point.
-main $1
+_main "$1"

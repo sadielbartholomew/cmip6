@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	local SOURCE_DIR
 	local TARGET_DIR
@@ -16,4 +16,4 @@ main()
 }
 
 # Invoke entry point.
-main
+_main

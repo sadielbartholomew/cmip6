@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	local ARCHIVE_FOLDER 
 	
@@ -20,4 +20,4 @@ main()
 }
 
 # Invoke entry point.
-main $1
+_main "$1"

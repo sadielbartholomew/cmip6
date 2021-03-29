@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	if [ "$1" ]; then
 		local institution=$1
@@ -9,10 +9,10 @@ main()
 		local institution=all
 	fi
 
-	pushd "$CMIP6_HOME"
+	pushd "$CMIP6_HOME" || exit
 	pipenv run python "$CMIP6_HOME"/lib/citations/generate_json.py --institution-id=$institution
-	popd
+	popd || exit
 }
 
 # Invoke entry point.
-main $1
+_main "$1"

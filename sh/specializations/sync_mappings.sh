@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	rm -rf "$CMIP6_HOME"/lib/models/init_json_from_cmip5/csv-files/*.csv
 	for specialization in "${CMIP6_REALM_SPECIALIZATIONS[@]}"
@@ -11,4 +11,4 @@ main()
 }
 
 # Invoke entry point.
-main
+_main

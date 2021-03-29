@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	for specialization in "${CMIP6_REALM_SPECIALIZATIONS[@]}"
 	do
@@ -10,4 +10,4 @@ main()
 }
 
 # Invoke entry point.
-main
+_main

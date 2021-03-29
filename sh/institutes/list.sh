@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	pipenv run python "$CMIP6_HOME"/lib/institutes/list.py
 }
 
 # Invoke entry point.
-main
+_main

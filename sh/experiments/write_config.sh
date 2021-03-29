@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	declare input_dir=$CMIP6_HOME/repos/libs/esdoc-docs/cmip6/experiments/cim-documents
 	declare output_dir=$CMIP6_HOME/repos/libs/esdoc-docs/cmip6/experiments/config
@@ -12,4 +12,4 @@ main()
 }
 
 # Invoke entry point.
-main
+_main

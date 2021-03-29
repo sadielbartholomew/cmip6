@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	if [ "$1" ]; then
 		institution=$1
@@ -11,10 +11,10 @@ main()
 
 	xls_template=$CMIP6_HOME/lib/citations/templates/citations.xlsx
 
-	pushd "$CMIP6_HOME"
+	pushd "$CMIP6_HOME" || exit
 	pipenv run python "$CMIP6_HOME"/lib/citations/init_xls.py --institution-id=$institution --xls-template=$xls_template
-	popd
+	popd || exit
 }
 
 # Invoke entry point.
-main $1
+_main "$1"

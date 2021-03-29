@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	if [ "$1" ]; then
 		institution=$1
@@ -13,4 +13,4 @@ main()
 }
 
 # Invoke entry point.
-main $1
+_main "$1"

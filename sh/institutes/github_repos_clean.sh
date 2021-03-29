@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function main()
+function function _main()
 {
     local INSTITUTION
 
@@ -18,7 +18,7 @@ function do_clean() {
     local INSTITUTION=${1}
     local REPO="$CMIP6_HOME"/repos/institutions/"$INSTITUTION"
 
-    pushd "$REPO"
+    pushd "$REPO" || exit
     if [ ! -d "$REPO"/cmip6 ]; then            
         mkdir -p "$REPO"/cmip6
     fi
@@ -34,8 +34,8 @@ function do_clean() {
     if [ ! -d "$REPO"/cmip6/responsible_parties ]; then            
         mkdir -p "$REPO"/cmip6/responsible_parties
     fi
-    popd
+    popd || exit
 }
 
 # Invoke entry point.
-main
+_main

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	pipenv run python "$CMIP6_HOME"/lib/models/generate_comparator_json.py --destination $1
 }
 
 # Invoke entry point.
-main $1
+_main "$1"

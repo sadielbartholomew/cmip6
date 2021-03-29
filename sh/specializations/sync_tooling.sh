@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	# Sync definitions.
 	for specialization in "${CMIP6_REALM_SPECIALIZATIONS[@]}"
@@ -31,4 +31,4 @@ main()
 }
 
 # Invoke entry point.
-main
+_main

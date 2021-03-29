@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
     local SPECIALIZATION
 	local REPO_NAME
@@ -15,9 +15,9 @@ main()
 			log_banner
 			log "status : "$SPECIALIZATION
 			log_banner		
-			pushd "$PATH_TO_REPO"
+			pushd "$PATH_TO_REPO" || exit
 			git status
-			popd
+			popd || exit
 		else
 			log "specialization repo needs to be installed: $SPECIALIZATION"
 		fi
@@ -25,4 +25,4 @@ main()
 }
 
 # Invoke entry point.
-main
+_main

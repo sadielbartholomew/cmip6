@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	log "syncing py files ..."
 	rm "$CMIP6_HOME"/repos/libs/esdoc-py-client/pyesdoc/mp/specializations/cmip6/*.py
@@ -46,4 +46,4 @@ main()
 }
 
 # Invoke entry point.
-main
+_main

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
     local INSTITUTION_ID
 
@@ -9,9 +9,9 @@ main()
 	do
 		if [ -d "$CMIP6_HOME"/repos/institutions/"$INSTITUTION_ID" ]; then
 			log "GITHUB : status of  $INSTITUTION_ID:"
-			pushd "$CMIP6_HOME"/repos/institutions/"$INSTITUTION_ID"
+			pushd "$CMIP6_HOME"/repos/institutions/"$INSTITUTION_ID" || exit
 			git status
-			popd
+			popd || exit
 		else
 			log "institutional repo needs to be installed: $INSTITUTION_ID"
 		fi
@@ -19,4 +19,4 @@ main()
 }
 
 # Invoke entry point.
-main
+_main

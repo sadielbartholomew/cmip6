@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-main()
+function _main()
 {
 	declare io_dir=$CMIP6_HOME/repos/libs/esdoc-docs/cmip6/experiments/cim-documents
 	declare spreadsheet=$CMIP6_HOME/repos/libs/esdoc-docs/cmip6/experiments/spreadsheet/experiments.xlsx
@@ -14,4 +14,4 @@ main()
 }
 
 # Invoke entry point.
-main
+_main
