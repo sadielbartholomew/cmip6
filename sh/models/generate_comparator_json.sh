@@ -3,7 +3,9 @@
 # Main entry point.
 function _main()
 {
-	pipenv run python "$CMIP6_HOME"/lib/models/generate_comparator_json.py --destination $1
+	local DIR_OUTPUT=${1}
+
+	pipenv run python "$CMIP6_HOME"/lib/models/generate_comparator_json.py --destination "$DIR_OUTPUT"
 }
 
 # Invoke entry point.

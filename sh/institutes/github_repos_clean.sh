@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function function _main()
+function _main()
 {
     local INSTITUTION
 

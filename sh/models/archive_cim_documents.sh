@@ -3,6 +3,7 @@
 # Main entry point.
 function _main()
 {
+	local INSTITUTION=${1}
 	local ARCHIVE_FOLDER 
 	
 	ARCHIVE_FOLDER=$CMIP6_HOME/repos/archives/esdoc-archive/esdoc/cmip6/spreadsheet-models
@@ -11,12 +12,12 @@ function _main()
 	fi
 
 	if [ "$1" ]; then
-		rm -rf "$ARCHIVE_FOLDER"/cmip6_$1*.*
+		rm -rf "$ARCHIVE_FOLDER"/cmip6_"$1"*.*
 	else
 		rm -rf "$ARCHIVE_FOLDER"/*.*
 	fi
 
-	pipenv run python "$CMIP6_HOME"/lib/models/archive_cim_documents.py --destination="$ARCHIVE_FOLDER" --institution-id=$1
+	pipenv run python "$CMIP6_HOME"/lib/models/archive_cim_documents.py --destination="$ARCHIVE_FOLDER" --institution-id="$INSTITUTION"
 }
 
 # Invoke entry point.

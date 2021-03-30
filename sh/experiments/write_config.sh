@@ -3,12 +3,15 @@
 # Main entry point.
 function _main()
 {
-	declare input_dir=$CMIP6_HOME/repos/libs/esdoc-docs/cmip6/experiments/cim-documents
-	declare output_dir=$CMIP6_HOME/repos/libs/esdoc-docs/cmip6/experiments/config
+	local DIR_INPUT
+	local DIR_OUTPUT
 
-	rm -rf $output_dir/*.json
+	declare DIR_INPUT="$CMIP6_HOME"/repos/libs/esdoc-docs/cmip6/experiments/cim-documents
+	declare DIR_OUTPUT="$CMIP6_HOME"/repos/libs/esdoc-docs/cmip6/experiments/config
 
-	pipenv run python "$CMIP6_HOME"/lib/experiments/write_config.py --input=$input_dir --output=$output_dir
+	rm -rf "$DIR_OUTPUT"/*.json
+
+	pipenv run python "$CMIP6_HOME"/lib/experiments/write_config.py --input="$DIR_INPUT" --output="$DIR_OUTPUT"
 }
 
 # Invoke entry point.

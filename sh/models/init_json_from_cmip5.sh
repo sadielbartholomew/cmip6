@@ -3,13 +3,15 @@
 # Main entry point.
 function _main()
 {
+	local INSTITUTION
+
 	if [ "$1" ]; then
-		institution=$1
+		INSTITUTION=${1}
 	else
-		institution=all
+		INSTITUTION="all"
 	fi
 
-	pipenv run python "$CMIP6_HOME"/lib/models/init_json_from_cmip5 --institution-id=$institution
+	pipenv run python "$CMIP6_HOME"/lib/models/init_json_from_cmip5 --institution-id="$INSTITUTION"
 }
 
 # Invoke entry point.

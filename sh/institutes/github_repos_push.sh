@@ -11,7 +11,7 @@ function _main()
 		if [ -d "$CMIP6_HOME"/repos/institutions/"$INSTITUTION_ID" ]; then
 			log "GITHUB : pushing  $INSTITUTION_ID"
 			pushd "$CMIP6_HOME"/repos/institutions/"$INSTITUTION_ID" || exit
-			git add *
+			git add "*"
 			git commit -S -a -m "$COMMENT"
 			git push origin master
 			popd || exit
