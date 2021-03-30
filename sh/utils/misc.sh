@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Wraps standard echo.
-log()
+function log()
 {
 	local NOW
 	local TABS
@@ -25,13 +25,13 @@ log()
 }
 
 # Outputs a line to split up logging.
-log_banner()
+function log_banner()
 {
 	echo "-------------------------------------------------------------------------------"
 }
 
 # Event handler: on command execution start.
-on_cmd_begin()
+function on_cmd_begin()
 {
 	local MSG=${1}
 
@@ -41,7 +41,7 @@ on_cmd_begin()
 }
 
 # Event handler: on command execution completion.
-on_cmd_end()
+function on_cmd_end()
 {
 	local MSG=${1}
 
