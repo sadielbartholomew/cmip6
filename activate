@@ -24,7 +24,7 @@ source "$CMIP6_HOME"/sh/utils/main.sh
 # ###############################################################
 
 # Command executor.
-exec_cmd()
+function exec_cmd()
 {
 	local CMD_TYPE=${1}
 	local CMD_SCRIPT=${2}
