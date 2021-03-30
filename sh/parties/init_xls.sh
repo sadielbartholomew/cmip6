@@ -3,15 +3,18 @@
 # Main entry point.
 function _main()
 {
+	local INSTITUTION
+	local PATH_TO_XLS_TEMPLATE
+
 	if [ "$1" ]; then
-		institution=$1
+		INSTITUTION=${1}
 	else
-		institution=all
+		INSTITUTION="all"
 	fi
 
-	xls_template=$CMIP6_HOME/lib/parties/templates/parties.xlsx
+	PATH_TO_XLS_TEMPLATE="$CMIP6_HOME"/lib/parties/templates/parties.xlsx
 
-	pipenv run python "$CMIP6_HOME"/lib/parties/init_xls.py --institution-id=$institution --xls-template=$xls_template
+	pipenv run python "$CMIP6_HOME"/lib/parties/init_xls.py --institution-id="$INSTITUTION" --xls-template="$PATH_TO_XLS_TEMPLATE"
 }
 
 # Invoke entry point.

@@ -13,7 +13,7 @@ function _main()
 		PATH_TO_REPO=$(get_path_to_repo "specializations" "$REPO_NAME")
 		if [ -d "$PATH_TO_REPO" ]; then
 			log_banner
-			log "status : "$SPECIALIZATION
+			log "status : $SPECIALIZATION"
 			log_banner		
 			pushd "$PATH_TO_REPO" || exit
 			git status

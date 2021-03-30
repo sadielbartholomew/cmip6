@@ -25,7 +25,7 @@ function _validate()
 
 	REPO_NAME=cmip6-specializations-"$SPECIALIZATION"
 	PATH_TO_REPO=$(get_path_to_repo "specializations" "$REPO_NAME")
-	pushd $CMIP6_HOME || exit
+	pushd "$CMIP6_HOME" || exit
 	pipenv run python "$PATH_TO_REPO"/validate
 	popd || exit
 }

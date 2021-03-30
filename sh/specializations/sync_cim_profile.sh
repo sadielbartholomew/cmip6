@@ -3,9 +3,12 @@
 # Main entry point.
 function _main()
 {
-	for specialization in "${CMIP6_REALM_SPECIALIZATIONS[@]}"
+	local SPECIALIZATION
+
+	for SPECIALIZATION in "${CMIP6_REALM_SPECIALIZATIONS[@]}"
 	do
-		cp "$CMIP6_HOME"/repos/specializations/cmip6-specializations-toplevel/cim_profile.py "$CMIP6_HOME"/repos/specializations/cmip6-specializations-$specialization/generate/cim_profile.py
+		cp "$CMIP6_HOME"/repos/specializations/cmip6-specializations-toplevel/cim_profile.py \
+		   "$CMIP6_HOME"/repos/specializations/cmip6-specializations-"$SPECIALIZATION"/generate/cim_profile.py
 	done
 }
 

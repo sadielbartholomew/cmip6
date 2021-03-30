@@ -16,7 +16,7 @@ function _main()
 		if [ -d "$PATH_TO_REPO" ]; then
 			log "GITHUB : pushing  $SPECIALIZATION"
 			pushd "$PATH_TO_REPO" || exit
-			git add *
+			git add "*"
 			git commit -S -a -m "$COMMENT"
 			git push origin master
 			popd || exit
@@ -30,7 +30,7 @@ function _main()
 	if [ -d "$PATH_TO_REPO" ]; then
 		log "GITHUB : pushing web-viewer"
 		pushd "$PATH_TO_REPO" || exit
-		git add .
+		git add "*"
 		git commit -m "$COMMENT"
 		git push -v origin master:master
 		popd || exit
