@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 function get_path_to_repo()
 {
     local REPO_TYPE=${1}

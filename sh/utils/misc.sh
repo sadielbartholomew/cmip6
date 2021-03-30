@@ -3,20 +3,24 @@
 # Wraps standard echo.
 log()
 {
-	declare now=`date +%Y-%m-%dT%H:%M:%S:000000`
-	declare tabs=''
+	local NOW
+	local TABS
+
+	NOW=$(date +%Y-%m-%dT%H:%M:%S:000000)
+	TABS=''
+
 	if [ "$1" ]; then
 		if [ "$2" ]; then
 			for ((i=0; i<$2; i++))
 			do
-				declare tabs+='\t'
+				TABS+='\t'
 			done
-	    	echo -e $now" [INFO] :: CMIP6 :: "$tabs$1
+	    	echo -e "$NOW [INFO] :: CMIP6 :: $TABS$1"
 	    else
-	    	echo -e $now" [INFO] :: CMIP6 :: "$1
+	    	echo -e "$NOW [INFO] :: CMIP6 :: $1"
 	    fi
 	else
-	    echo -e $now" [INFO] :: CMIP6 :: "
+	    echo -e "$NOW [INFO] :: CMIP6 :: "
 	fi
 }
 
@@ -29,16 +33,20 @@ log_banner()
 # Event handler: on command execution start.
 on_cmd_begin()
 {
+	local MSG=${1}
+
 	log_banner
-	log $1" :: BEGINS"
+	log "$MSG :: BEGINS"
 	log_banner
 }
 
 # Event handler: on command execution completion.
 on_cmd_end()
 {
+	local MSG=${1}
+
 	log_banner
-	log $1" :: ENDS"
+	log "$MSG :: ENDS"
 	log_banner
 }
 

@@ -5,7 +5,7 @@
 # ###############################################################
 
 # Activity ID - canonical name
-declare -a CMIP6_ACTIVITY_ID=(
+export CMIP6_ACTIVITY_ID=(
 	'aerchemmip'
 	'c4mip'
 	'cdrmip'
@@ -33,7 +33,7 @@ declare -a CMIP6_ACTIVITY_ID=(
 )
 
 # Activity ID - raw name
-declare -a CMIP6_ACTIVITY_ID_RAW=(
+export CMIP6_ACTIVITY_ID_RAW=(
 	'AerChemMIP'
 	'C4MIP'
 	'CDRMIP'
@@ -61,7 +61,7 @@ declare -a CMIP6_ACTIVITY_ID_RAW=(
 )
 
 # Institution ID - canonical name
-declare -a CMIP6_INSTITUTION_ID=(
+export CMIP6_INSTITUTION_ID=(
 	'aer'
 	'as-rcec'
 	'awi'
@@ -118,7 +118,7 @@ declare -a CMIP6_INSTITUTION_ID=(
 )
 
 # Institution ID - raw name
-declare -a CMIP6_INSTITUTION_ID_RAW=(
+export CMIP6_INSTITUTION_ID_RAW=(
 	'AER'
 	'AS-RCEC'
 	'AWI'
@@ -175,7 +175,7 @@ declare -a CMIP6_INSTITUTION_ID_RAW=(
 )
 
 # MIP-era ID - canonical name
-declare -a CMIP6_MIP_ERA=(
+export CMIP6_MIP_ERA=(
 	'cmip1'
 	'cmip2'
 	'cmip3'
@@ -184,7 +184,7 @@ declare -a CMIP6_MIP_ERA=(
 )
 
 # MIP-era ID - raw name
-declare -a CMIP6_MIP_ERA_RAW=(
+export CMIP6_MIP_ERA_RAW=(
 	'CMIP1'
 	'CMIP2'
 	'CMIP3'
@@ -193,7 +193,7 @@ declare -a CMIP6_MIP_ERA_RAW=(
 )
 
 # Source ID - canonical name
-declare -a CMIP6_SOURCE_ID=(
+export CMIP6_SOURCE_ID=(
 	'4aop-v1-5'
 	'access-cm2'
 	'access-esm1-5'
@@ -334,7 +334,7 @@ declare -a CMIP6_SOURCE_ID=(
 )
 
 # Source ID - raw name
-declare -a CMIP6_SOURCE_ID_RAW=(
+export CMIP6_SOURCE_ID_RAW=(
 	'4AOP-v1-5'
 	'ACCESS-CM2'
 	'ACCESS-ESM1-5'
@@ -475,7 +475,7 @@ declare -a CMIP6_SOURCE_ID_RAW=(
 )
 
 # Experiment ID - canonical name
-declare -a CMIP6_EXPERIMENT_ID=(
+export CMIP6_EXPERIMENT_ID=(
 	'1pctco2'
 	'1pctco2-4xext'
 	'1pctco2-bgc'
@@ -801,7 +801,7 @@ declare -a CMIP6_EXPERIMENT_ID=(
 )
 
 # Experiment ID - raw name
-declare -a CMIP6_EXPERIMENT_ID_RAW=(
+export CMIP6_EXPERIMENT_ID_RAW=(
 	'1pctCO2'
 	'1pctCO2-4xext'
 	'1pctCO2-bgc'
@@ -1131,7 +1131,7 @@ declare -a CMIP6_EXPERIMENT_ID_RAW=(
 # ###############################################################
 
 # Array of specifications.
-declare -a CMIP6_SPECIALIZATIONS=(
+export CMIP6_SPECIALIZATIONS=(
 	'aerosol'
 	'atmos'
 	'atmoschem'
@@ -1144,7 +1144,7 @@ declare -a CMIP6_SPECIALIZATIONS=(
 )
 
 # Array of realm specifications.
-declare -a CMIP6_REALM_SPECIALIZATIONS=(
+export CMIP6_REALM_SPECIALIZATIONS=(
 	'aerosol'
 	'atmos'
 	'atmoschem'

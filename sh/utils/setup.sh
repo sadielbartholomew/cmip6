@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main entry point.
-_function _main()
+function _main()
 {
     local ARCHIVE
     local INSTITUTION_ID
@@ -45,7 +45,7 @@ function _set_repo()
 
     mkdir -p "$PATH_TO_REPO_TYPE"
 
-    if [ -d $PATH_TO_REPO ]; then
+    if [ -d "$PATH_TO_REPO" ]; then
         log "... ... syncing $REPO_URL"
         pushd "$PATH_TO_REPO" || exit
         git pull > /dev/null 2>&1

@@ -4,6 +4,7 @@
 # PATHS
 # ###############################################################
 
+# Set home.
 export CMIP6_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Ensure target scripts are executable.
@@ -35,13 +36,13 @@ exec_cmd()
 	log_banner
 
 	if [ "$3" ] && [ "$4" ] && [ "$5" ]; then
-		source $CMD_TARGET "$3" "$4" "$5"
+		source "$CMD_TARGET" "$3" "$4" "$5"
 	elif [ "$3" ] && [ "$4" ]; then
-		source $CMD_TARGET "$3" "$4" ""
+		source "$CMD_TARGET" "$3" "$4" ""
 	elif [ "$3" ]; then
-		source $CMD_TARGET "$3" "" ""
+		source "$CMD_TARGET" "$3" "" ""
 	else
-		source $CMD_TARGET ""
+		source "$CMD_TARGET" ""
 	fi
 
 	log_banner

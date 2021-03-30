@@ -3,14 +3,16 @@
 # Main entry point.
 function _main()
 {
-	output_fpath=$CMIP6_HOME/sh/vocabs/write_bash_vars_output.txt
+	local PATH_TO_OUTPUT_FILE
+
+	PATH_TO_OUTPUT_FILE=$CMIP6_HOME/sh/vocabs/write_bash_vars_output.txt
 	
-	pipenv run python "$CMIP6_HOME"/lib/vocabs/write_bash_vars.py --output-fpath=$output_fpath
+	pipenv run python "$CMIP6_HOME"/lib/vocabs/write_bash_vars.py --output-fpath="$PATH_TO_OUTPUT_FILE"
 
-	cp $output_fpath "$CMIP6_HOME"/sh/vocabs/definitions.sh
-	rm $output_fpath
+	cp "$PATH_TO_OUTPUT_FILE" "$CMIP6_HOME"/sh/vocabs/definitions.sh
+	rm "$PATH_TO_OUTPUT_FILE"
 
-	log "WCRP cmip6 vocabs bash file written to "$CMIP6_HOME/sh/vocabs/definitions.sh
+	log "WCRP cmip6 vocabs bash file written to $CMIP6_HOME/sh/vocabs/definitions.sh"
 }
 
 # Invoke entry point.
