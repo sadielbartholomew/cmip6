@@ -13,6 +13,7 @@ function _main()
 
 	pushd "$CMIP6_HOME" || exit
 	pipenv run python "$CMIP6_HOME"/lib/models/reset_json.py --institution-id="$INSTITUTION"
+	popd || exit
 }
 
 # Invoke entry point.
