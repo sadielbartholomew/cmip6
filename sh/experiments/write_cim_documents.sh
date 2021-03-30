@@ -14,7 +14,9 @@ function _main()
 	rm -rf "$DIR_IO"
 	mkdir "$DIR_IO"
 
+	pushd "$CMIP6_HOME" || exit
 	pipenv run python "$CMIP6_HOME"/lib/experiments/write_cim_documents --io-dir="$DIR_IO" --spreadsheet="$PATH_TO_SPREADSHEET" --identifiers="$PATH_TO_IDENTIFIERS"
+	popd || exit
 }
 
 # Invoke entry point.

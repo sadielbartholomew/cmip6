@@ -17,7 +17,9 @@ function _main()
     ARCHIVE_DIR="$CMIP6_HOME"/repos/archives/esdoc-cdf2cim-archive/data
 	OUTPUT_DIR="$CMIP6_HOME"/repos/archives/esdoc-cdf2cim-archive/subset
 
+	pushd "$CMIP6_HOME" || exit
 	pipenv run python "$CMIP6_HOME"/lib/ensembles/generate_subsets.py --institution-id="$INSTITUTION" --archive-directory="$ARCHIVE_DIR" --output-directory="$OUTPUT_DIR"
+	popd || exit
 
 	on_cmd_end "ensembles-generate-subsets"
 }

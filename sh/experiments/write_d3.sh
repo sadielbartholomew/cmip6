@@ -11,7 +11,9 @@ function _main()
 
 	rm -rf "$DIR_OUTPUT"/*.*
 
+	pushd "$CMIP6_HOME" || exit
 	pipenv run python "$CMIP6_HOME"/lib/experiments/write_d3.py --input="$DIR_INPUT" --output="$DIR_OUTPUT"
+	popd || exit
 }
 
 # Invoke entry point.

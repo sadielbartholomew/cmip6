@@ -12,7 +12,9 @@ function _main()
 	rm -rf "$TARGET_DIR"
 	mkdir -p "$TARGET_DIR"
 
+	pushd "$CMIP6_HOME" || exit
 	pipenv run python "$CMIP6_HOME"/lib/experiments/archive_cim_documents.py --source-dir="$SOURCE_DIR" --target-dir="$TARGET_DIR"
+	popd || exit
 }
 
 # Invoke entry point.

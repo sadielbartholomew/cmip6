@@ -11,7 +11,9 @@ function _main()
 		INSTITUTION="all"
 	fi
 
+	pushd "$CMIP6_HOME" || exit
 	pipenv run python "$CMIP6_HOME"/lib/models/reset_cim.py --institution-id="$INSTITUTION"
+	popd || exit
 }
 
 # Invoke entry point.

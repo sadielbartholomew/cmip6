@@ -14,7 +14,9 @@ function _main()
 
 	PATH_TO_XLS_TEMPLATE="$CMIP6_HOME"/lib/machines/templates/machines.xlsx
 
+	pushd "$CMIP6_HOME" || exit	
 	pipenv run python "$CMIP6_HOME"/lib/machines/init_xls.py --institution-id="$INSTITUTION" --xls-template="$PATH_TO_XLS_TEMPLATE"
+	popd || exit
 }
 
 # Invoke entry point.

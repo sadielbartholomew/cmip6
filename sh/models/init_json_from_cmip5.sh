@@ -11,7 +11,9 @@ function _main()
 		INSTITUTION="all"
 	fi
 
+	pushd "$CMIP6_HOME" || exit
 	pipenv run python "$CMIP6_HOME"/lib/models/init_json_from_cmip5 --institution-id="$INSTITUTION"
+	popd || exit
 }
 
 # Invoke entry point.
