@@ -15,18 +15,21 @@ function _main()
     log "... archives:"
 	for ARCHIVE in "${CMIP6_ARCHIVES[@]}"
 	do      
-        _set_repo "archives" "$LIB" https://github.com/ES-DOC/"$ARCHIVE".git
+        _set_repo "archives" "$ARCHIVE" https://github.com/ES-DOC/"$ARCHIVE".git
 	done     
+
     log "... institutions:"
 	for INSTITUTION_ID in "${CMIP6_INSTITUTION_ID[@]}"
 	do     
         _set_repo "institutions" "$INSTITUTION_ID" https://github.com/ES-DOC-INSTITUTIONAL/"$INSTITUTION_ID".git
 	done    
+
     log "... libs:"
 	for LIB in "${CMIP6_LIBS[@]}"
 	do      
         _set_repo "libs" "$LIB" https://github.com/ES-DOC/"$LIB".git
 	done       
+
     log "... specializations:"
 	for SPECIALIZATION in "${CMIP6_SPECIALIZATIONS[@]}"
 	do     

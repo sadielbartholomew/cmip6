@@ -7,9 +7,9 @@ function _main()
 	local PATH_TO_XLS_TEMPLATE
 
 	if [ "$1" ]; then
-		INSTITUTION=$1
+		INSTITUTION=${1}
 	else
-		INSTITUTION=all
+		INSTITUTION="all"
 	fi
 
 	PATH_TO_XLS_TEMPLATE="$CMIP6_HOME"/lib/machines/templates/machines.xlsx

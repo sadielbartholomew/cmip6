@@ -7,9 +7,9 @@ function _main()
 	local XLS_TEMPLATE
 
 	if [ "$1" ]; then
-		INSTITUTION=$1
+		INSTITUTION=${1}
 	else
-		INSTITUTION=all
+		INSTITUTION="all"
 	fi
 
 	XLS_TEMPLATE=$CMIP6_HOME/lib/citations/templates/citations.xlsx

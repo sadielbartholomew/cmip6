@@ -6,9 +6,9 @@ function _main()
 	local INSTITUTION_ID
 
 	if [ "$1" ]; then
-		INSTITUTION_ID=$1
+		INSTITUTION_ID=${1}
 	else
-		INSTITUTION_ID=all
+		INSTITUTION_ID="all"
 	fi
 
 	pushd "$CMIP6_HOME" || exit
