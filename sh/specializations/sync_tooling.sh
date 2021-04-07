@@ -13,15 +13,11 @@ function _main()
 		PATH_TO_SPECIALIZATION="$CMIP6_HOME"/repos/specializations/cmip6-specializations-"$SPECIALIZATION"
 		# ... generator
 		rm -rf "$PATH_TO_SPECIALIZATION"/generate
-		mkdir "$PATH_TO_SPECIALIZATION"/generate
-		cp -r "$CMIP6_HOME"/repos/specializations/cmip6-specializations-toplevel/generate/* \
-		      "$PATH_TO_SPECIALIZATION"/generate
+		cp -r "$CMIP6_HOME"/repos/specializations/cmip6-specializations-toplevel/generate "$PATH_TO_SPECIALIZATION"
 
 		# ... validator
 		rm -rf "$PATH_TO_SPECIALIZATION"/validate
-		mkdir "$PATH_TO_SPECIALIZATION"/validate
-		cp -r "$CMIP6_HOME"/repos/specializations/cmip6-specializations-toplevel/validate/* 
-		      "$PATH_TO_SPECIALIZATION"/validate
+		cp -r "$CMIP6_HOME"/repos/specializations/cmip6-specializations-toplevel/validate "$PATH_TO_SPECIALIZATION"
 
 		log "... synced: $SPECIALIZATION"
 	done
