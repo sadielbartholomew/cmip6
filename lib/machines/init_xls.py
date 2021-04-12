@@ -16,7 +16,7 @@ import shutil
 from copy import copy
 
 from openpyxl import load_workbook
-from openpyxl.styles import NamedStyle, Font, PatternFill
+from openpyxl.styles import NamedStyle, Font, PatternFill, Alignment
 from openpyxl.worksheet.datavalidation import DataValidation
 
 from lib.utils import io_mgr, logger, vocabs, constants
@@ -57,13 +57,12 @@ def copy_cell(sheet, cell_to_copy_to, cell_to_copy_from):
 
 
 def get_applicable_mips_with_experiments(institution):
-    """TODO."""
+    """TODO, and MOVE TO UTILS."""
     # First find all of the applicable MIPs for the institute
     all_applicable_mips = list()
     for source in vocabs.get_institute_sources(institution):
         for mip in source.activity_participation:
             all_applicable_mips.append(mip.encode())
-    print(all_applicable_mips)
 
     # Some experiments apply to multiple MIPs, so handle the mapping:
     exps_to_mips = dict()
@@ -108,17 +107,50 @@ def set_institute_name_in_xls(institution, spreadsheet):
         short_name, constants.CMIP6_MIP_ERA.upper())
 
 
+def manage_no_applicable_items_found(
+        sheet, start_row, item_missing, question_number):
+    """TODO."""
+    # Delete then re-insert same number of rows to clear 'question' styling
+    sheet.delete_rows(start_row - 1, 2)
+    sheet.insert_rows(start_row - 1, 2)
+
+    note_cell_address = "A{}".format(start_row)
+    note_cell = sheet[note_cell_address]
+    note_cell.font = Font(name="Helvetica Neue", size=14, bold=True)
+    sheet[note_cell_address] = "N/A: NO SECTIONS"
+
+    msg_cell_address = "B{}".format(start_row)
+    msg_cell = sheet[msg_cell_address]
+    msg_cell.font = Font(
+        name="Helvetica Neue", size=14, bold=True, color="BE0E0E")  # red
+    sheet[msg_cell_address] = (
+        "!!! No applicable {} detected for your institute. If that is "
+        "correct, please skip this question ({}), otherwise contact "
+        "ES-DOC support via the email above so we can rectify "
+        "this. !!!".format(item_missing, question_number)
+    )
+    sheet.row_dimensions[start_row].height = 50
+    sheet["B{}".format(start_row)].alignment = Alignment(
+        wrap_text=True)
+
+
 def set_applicable_models_in_xls(institution, spreadsheet):
     """Create a question concerning every CMIP6 model ran by the institute."""
     machines_sheet = spreadsheet["Machine 1"]
-
     active_row = 390  # last row where model question cell block needs updating
     label_base = "1.8.2.{}"
     section_number = 1  # ready to increment label_base end sectioning from one
 
     # Merge columns on the B-D for the question block.
-    for coor in range(active_row, active_row + 100):
-        machines_sheet.merge_cells("B{0}:D{0}".format(coor))
+    start_merging_at_cell = active_row - 20
+    for coor in range(start_merging_at_cell, start_merging_at_cell + 500):
+         machines_sheet.merge_cells("B{0}:D{0}".format(coor))
+         machines_sheet.row_dimensions[start_merging_at_cell].height = 40
+
+    if not vocabs.get_model_configurations(institution):
+        manage_no_applicable_items_found(
+            machines_sheet, active_row, "models", "1.8")
+        return active_row
 
     for model in vocabs.get_model_configurations(institution):
         if section_number != 1:
@@ -192,12 +224,7 @@ def set_applicable_experiments_in_xls(institution, spreadsheet, start_cell):
     label_base = "1.9.2.{}"
     section_number = 1  # ready to increment label_base end sectioning from one
 
-    # Merge columns on the B-D for the question block. Note the number 100 is
-    # from a maximum of ~23 MIPs, with 3 cells per question => ~100 cells max.
-    start_merging_at_cell = active_row - 20
-    for coor in range(start_merging_at_cell, start_merging_at_cell + 100):
-        machines_sheet.merge_cells("B{0}:D{0}".format(coor))
-    # Also make cell with instructions much taller as it holds a lot oftext
+    # Make cell with instructions much taller as it holds a lot of text
     # (can't set via original template as it messes up processed cell heights).
     machines_sheet.row_dimensions[active_row - 3].height = 220
 
@@ -207,10 +234,14 @@ def set_applicable_experiments_in_xls(institution, spreadsheet, start_cell):
     machines_sheet.add_data_validation(all_or_some_dropdown)
     all_or_some_dropdown.add("B{}".format(active_row - 10))
 
+    if not get_applicable_mips_with_experiments(institution):
+        manage_no_applicable_items_found(
+            machines_sheet, active_row, "MIPs", "1.9")
+        return active_row
+
     # Iterate over MIPs to list and tied experiments for each dropdown box
     exps_dropdown = []  # to register separate data alidation items later
     for mip, exps in get_applicable_mips_with_experiments(institution).items():
-        print("USING :::", mip, exps)
 
         if section_number != 1:
             # Create new block of three rows: two question rows plus one gap
@@ -284,6 +315,8 @@ def set_applicable_experiments_in_xls(institution, spreadsheet, start_cell):
 
         section_number += 1  # update sub-sub-sub-section for next question
 
+    return active_row  # so know where to start at for end-of-tab note
+
 
 def _main(args):
     """Main entry point.
@@ -293,16 +326,19 @@ def _main(args):
     if not os.path.exists(args.xls_template):
         raise ValueError("XLS template file does not exist")
 
-    # Take generic machine spreadsheet template as Workbook ready to customise.
+    # Take generic template ready to process with institute-specific info.
     template_name = args.xls_template
-    generic_template = load_workbook(filename=template_name)
-
-    # Add some styles needed for coordinated formatting of processed cells.
-    generic_template.add_named_style(QUESTION_HEADER_STYLE)
-    generic_template.add_named_style(QUESTION_INPUT_BOX_STYLE)
 
     # Write out a customised template file for every institute.
     for institution in vocabs.get_institutes(args.institution_id):
+        # !!! Must define this on each iteration instead of outside the 'for'
+        # loop else iterations will include previous changes. !!!
+        generic_template = load_workbook(filename=template_name)
+
+        # Styles needed for clear, coordinated formatting of processed cells.
+        generic_template.add_named_style(QUESTION_HEADER_STYLE)
+        generic_template.add_named_style(QUESTION_INPUT_BOX_STYLE)
+        
         # Customise the template appropriately to the given institute:
         #     1. Set the institute name
         set_institute_name_in_xls(institution, generic_template)
@@ -311,10 +347,25 @@ def _main(args):
         end_cell = set_applicable_models_in_xls(institution, generic_template)
 
         #     3. Set the applicable CMIP6 experiments for this institute
-        set_applicable_experiments_in_xls(
+        tab_end_cell = set_applicable_experiments_in_xls(
             institution, generic_template, end_cell)
 
-        # Write out the customised template to a new XLS file.
+        # Add a note that the tab is done, with a reminder, for clarity.
+        generic_template["Machine 1"]["B{}".format(tab_end_cell + 2)] = (
+            "END of spreadsheet tab covering a single machine. Remember to "
+            "document all CMIP6 machines for your institute in a separate tab."
+        )
+        generic_template["Machine 1"][
+            "B{}".format(tab_end_cell + 2)
+        ].font = Font(name="Helvetica Neue", size=14, italic=True, bold=True)
+        generic_template["Machine 1"].row_dimensions[
+            tab_end_cell + 2].height = 50
+        generic_template["Machine 1"][
+            "B{}".format(tab_end_cell + 2)
+        ].alignment = Alignment(wrap_text=True)
+
+        # Close template and write the customised template to a new XLS file.
+        generic_template.close()
         final_spreadsheet_name = "{}_{}_machines.xlsx".format(
             constants.CMIP6_MIP_ERA, institution.canonical_name)
         generic_template.save(final_spreadsheet_name)
