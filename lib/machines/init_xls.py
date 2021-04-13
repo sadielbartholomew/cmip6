@@ -371,10 +371,11 @@ def _main(args):
         generic_template.save(final_spreadsheet_name)
 
         # Place the template into the appropriate directory.
-        dest = io_mgr.get_machines_spreadsheet(i)
-        if not os.path.exists(dest):
-            logger.log("moving xls file for {}".format(i.raw_name))
-            shutil.copy(customised_template, dest)
+        # Write one file per institute.
+        dest = io_mgr.get_machines_spreadsheet(institution)
+        logger.log("moving xls file for {}".format(institution.raw_name))
+        print(final_spreadsheet_name, dest)
+        shutil.copy(final_spreadsheet_name, dest)
 
 
 # Main entry point.
