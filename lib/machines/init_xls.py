@@ -57,7 +57,7 @@ def copy_cell(sheet, cell_to_copy_to, cell_to_copy_from):
 
 
 def get_applicable_mips_with_experiments(institution):
-    """TODO, and MOVE TO UTILS."""
+    """Return MIPs applicable to the given institute mapped to experiments."""
     # First find all of the applicable MIPs for the institute
     all_applicable_mips = list()
     for source in vocabs.get_institute_sources(institution):
@@ -81,7 +81,13 @@ def get_applicable_mips_with_experiments(institution):
 
 
 def process_enum_options(experiment_list):
-    """TODO."""
+    """Process lists of experiments for drop-down box options or text.
+
+    Namely, if there is only one experiment, it will be returned ready to be
+    written as text into the cell, otherwise the options 'ALL' and 'NONE' will
+    be added ready to be st as further options to a drop-down data validation.
+
+    """
     if len(experiment_list) == 1:
         return experiment_list
     elif len(experiment_list) >= 1:
@@ -109,7 +115,7 @@ def set_institute_name_in_xls(institution, spreadsheet):
 
 def manage_no_applicable_items_found(
         sheet, start_row, item_missing, question_number):
-    """TODO."""
+    """Render a message indicating none of a given item has been found."""
     # Delete then re-insert same number of rows to clear 'question' styling
     sheet.delete_rows(start_row - 1, 2)
     sheet.insert_rows(start_row - 1, 2)
@@ -134,8 +140,21 @@ def manage_no_applicable_items_found(
         wrap_text=True)
 
 
+def set_end_of_sheet_note(sheet, end_cell):
+    """Render a message indicating the end of the spreadsheet."""
+    cell = "B{}".format(end_cell)
+    sheet[cell] = (
+        "END of spreadsheet tab covering a single machine. Remember to "
+        "document all CMIP6 machines for your institute in a separate tab."
+    )
+    sheet[cell].font = Font(
+        name="Helvetica Neue", size=14, italic=True, bold=True)
+    sheet[cell].alignment = Alignment(wrap_text=True)
+    sheet.row_dimensions[end_cell].height = 50
+
+
 def set_applicable_models_in_xls(institution, spreadsheet):
-    """Create a question concerning every CMIP6 model ran by the institute."""
+    """Create questions concerning CMIP6 models ran on the machine."""
     machines_sheet = spreadsheet["Machine 1"]
     active_row = 390  # last row where model question cell block needs updating
     label_base = "1.8.2.{}"
@@ -214,7 +233,7 @@ def set_applicable_models_in_xls(institution, spreadsheet):
 
 
 def set_applicable_experiments_in_xls(institution, spreadsheet, start_cell):
-    """TODO."""
+    """Create questions about CMIP6 experiments conducted on the machine."""
     machines_sheet = spreadsheet["Machine 1"]
      # Last row where question block needs updating. To find this, grab the
      # final active cell of the model questions which sit above and add 20
@@ -351,18 +370,7 @@ def _main(args):
             institution, generic_template, end_cell)
 
         # Add a note that the tab is done, with a reminder, for clarity.
-        generic_template["Machine 1"]["B{}".format(tab_end_cell + 2)] = (
-            "END of spreadsheet tab covering a single machine. Remember to "
-            "document all CMIP6 machines for your institute in a separate tab."
-        )
-        generic_template["Machine 1"][
-            "B{}".format(tab_end_cell + 2)
-        ].font = Font(name="Helvetica Neue", size=14, italic=True, bold=True)
-        generic_template["Machine 1"].row_dimensions[
-            tab_end_cell + 2].height = 50
-        generic_template["Machine 1"][
-            "B{}".format(tab_end_cell + 2)
-        ].alignment = Alignment(wrap_text=True)
+        set_end_of_sheet_note(generic_template["Machine 1"], tab_end_cell + 2)
 
         # Close template and write the customised template to a new XLS file.
         generic_template.close()
